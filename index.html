@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="dark">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https:; font-src 'self'; connect-src https://ipapi.co https:; object-src 'none'; base-uri 'none'; form-action 'self'">    <title>WowBrowser</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https:; object-src 'none'; base-uri 'none'; form-action 'self'">    <title>WowBrowser</title>
     <link rel="icon" type="image/svg+xml" href="assets/wowbrowser-mark.svg">
     <link rel="stylesheet" href="styles.css">
   </head>
@@ -18,8 +18,7 @@
         </div>
       </div>
       <div class="download-banner-actions">
-        <a class="primary-button banner-download" href="https://github.com/microbica/WowBrowser-Releases/releases/latest/download/WowBrowser-win-Setup.exe" target="_blank" rel="noopener noreferrer" data-open-external data-i18n="installer">Instalador .exe</a>
-        <a class="secondary-button banner-download" href="https://github.com/microbica/WowBrowser-Releases/releases/latest/download/WowBrowser-win-Portable.zip" target="_blank" rel="noopener noreferrer" data-open-external data-i18n="portable">Portátil .zip</a>
+        <a class="primary-button banner-download" href="update.html" data-i18n="bannerDownload">Descargar para Windows</a>
       </div>
       <button class="icon-button banner-close" type="button" id="dismiss-download-banner" aria-label="Cerrar aviso de descarga" data-i18n-aria-label="dismissBanner">×</button>
     </aside>
@@ -207,7 +206,7 @@
               <input id="location-toggle" class="location-toggle" type="checkbox" aria-label="Permitir país aproximado por IP">
             </label>
           </div>
-          <div class="settings-footnote">Si lo permites, ipapi.co recibe tu IP pública para devolver únicamente el código de país. WowBrowser no guarda tu IP y puedes desactivarlo aquí.</div>
+          <div class="settings-footnote">Si lo permites, api.country.is recibe tu IP pública para devolver únicamente el código de país. WowBrowser no guarda tu IP y puedes desactivarlo aquí.</div>
         </section>
 
         <footer class="app-footer">
@@ -233,7 +232,7 @@
     </dialog>
     <dialog class="modal location-consent-dialog" id="location-consent-dialog" aria-labelledby="location-consent-title">
       <div class="modal-heading"><div><span class="eyebrow">PRIVACIDAD</span><h2 id="location-consent-title">¿Usar tu país aproximado?</h2></div></div>
-       <p class="form-hint">Si aceptas, en cada inicio consultaremos ipapi.co para obtener solo tu país aproximado. El servicio recibe tu IP pública. WowBrowser no la guarda ni solicita GPS o coordenadas precisas. Guardaremos el permiso. Si eliges «Ahora no», volveremos a preguntarte al próximo inicio. Puedes desactivarlo en Preferencias.</p>
+       <p class="form-hint">Si aceptas, en cada inicio consultaremos api.country.is para obtener solo tu país aproximado. El servicio recibe tu IP pública. WowBrowser no la guarda ni solicita GPS o coordenadas precisas. Guardaremos el permiso. Si eliges «Ahora no», volveremos a preguntarte al próximo inicio. Puedes desactivarlo en Preferencias.</p>
       <div class="modal-actions">
         <button class="secondary-button" type="button" id="deny-location">Ahora no</button>
         <button class="primary-button" type="button" id="allow-location">Permitir país aproximado <span>→</span></button>
@@ -249,10 +248,9 @@
         <div><span data-i18n="installedVersion">Versión instalada</span><strong id="update-installed-version">—</strong></div>
         <div><span data-i18n="availableVersion">Versión disponible</span><strong id="update-available-version">—</strong></div>
       </div>
-      <a class="text-button update-release-link" href="https://github.com/microbica/WowBrowser-Releases/releases/latest" target="_blank" rel="noopener noreferrer" data-open-external><span data-i18n="releaseNotes">Ver notas de la versión</span> <span aria-hidden="true">↗</span></a>
+      <a id="update-release-link" class="text-button update-release-link" href="https://github.com/microbica/WowBrowser-Releases/releases/latest" target="_blank" rel="noopener noreferrer" data-open-external><span data-i18n="releaseNotes">Ver notas de la versión</span> <span aria-hidden="true">↗</span></a>
       <div class="update-download-actions">
-        <a class="primary-button button-link" href="https://github.com/microbica/WowBrowser-Releases/releases/latest/download/WowBrowser-win-Setup.exe" target="_blank" rel="noopener noreferrer" data-open-external data-i18n="downloadInstaller">Descargar instalador</a>
-        <a class="secondary-button button-link" href="https://github.com/microbica/WowBrowser-Releases/releases/latest/download/WowBrowser-win-Portable.zip" target="_blank" rel="noopener noreferrer" data-open-external data-i18n="downloadPortable">Descargar ZIP portátil</a>
+        <a class="primary-button button-link" id="update-download-link" href="update.html" data-i18n="viewDownloads">Ver descargas disponibles</a>
       </div>
       <div class="modal-actions"><button class="secondary-button" type="button" id="dismiss-update" data-i18n="notNow">Ahora no</button></div>
     </dialog>

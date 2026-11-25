@@ -27,7 +27,7 @@ async function loadUpdateManifest() {
     if (!response.ok) return;
     const manifest = await response.json();
     if (!manifest || manifest.schemaVersion !== 1 || typeof manifest.version !== "string") return;
-    if (!/^v?(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?(?:\+[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?$/.test(manifest.version.trim()))
+    if (!/^v?(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:\.(0|[1-9]\d*))?(?:-[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?(?:\+[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?$/.test(manifest.version.trim()))
       return;
     document.querySelector("#update-available-version").textContent = manifest.version.trim();
     const windows = manifest.downloads?.windows;
@@ -40,6 +40,20 @@ async function loadUpdateManifest() {
 }
 
 document.addEventListener("click", (event) => {
+  const download = event.target.closest("[data-download]");
+  if (download) {
+    const url = safeHttpsUrl(download.href);
+    if (!url) {
+      event.preventDefault();
+      return;
+    }
+    if (window.__wowbrowser?.native === true) {
+      event.preventDefault();
+      window.location.href = "wowbrowser://open-external?url=" + encodeURIComponent(url);
+    }
+    return;
+  }
+
   const link = event.target.closest("[data-open-external]");
   if (!link) return;
   const url = safeHttpsUrl(link.href);

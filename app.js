@@ -439,6 +439,8 @@ const downloadUiText = {
     bannerLabel: "Descargar WowBrowser para Windows",
     bannerTitle: "Lleva WowBrowser a tu escritorio",
     bannerDescription: "Descárgalo para Windows y abre tus servidores en un solo lugar.",
+    bannerDownload: "Descargar para Windows",
+    viewDownloads: "Ver descargas disponibles",
     installer: "Instalador .exe",
     portable: "Portátil .zip",
     dismissBanner: "Cerrar aviso de descarga",
@@ -456,6 +458,8 @@ const downloadUiText = {
     bannerLabel: "Download WowBrowser for Windows",
     bannerTitle: "Bring WowBrowser to your desktop",
     bannerDescription: "Download it for Windows and open your servers in one place.",
+    bannerDownload: "Download for Windows",
+    viewDownloads: "View available downloads",
     installer: "Installer .exe",
     portable: "Portable .zip",
     dismissBanner: "Dismiss download notice",
@@ -473,6 +477,8 @@ const downloadUiText = {
     bannerLabel: "Baixar o WowBrowser para Windows",
     bannerTitle: "Leve o WowBrowser para o seu desktop",
     bannerDescription: "Baixe para Windows e abra seus servidores em um só lugar.",
+    bannerDownload: "Baixar para Windows",
+    viewDownloads: "Ver downloads disponíveis",
     installer: "Instalador .exe",
     portable: "Portátil .zip",
     dismissBanner: "Fechar aviso de download",
@@ -490,6 +496,8 @@ const downloadUiText = {
     bannerLabel: "Télécharger WowBrowser pour Windows",
     bannerTitle: "Emportez WowBrowser sur votre bureau",
     bannerDescription: "Téléchargez-le pour Windows et ouvrez vos serveurs au même endroit.",
+    bannerDownload: "Télécharger pour Windows",
+    viewDownloads: "Voir les téléchargements disponibles",
     installer: "Installateur .exe",
     portable: "Version portable .zip",
     dismissBanner: "Fermer l’avis de téléchargement",
@@ -507,6 +515,8 @@ const downloadUiText = {
     bannerLabel: "WowBrowser für Windows herunterladen",
     bannerTitle: "Hol dir WowBrowser auf den Desktop",
     bannerDescription: "Lade es für Windows herunter und öffne deine Server an einem Ort.",
+    bannerDownload: "Für Windows herunterladen",
+    viewDownloads: "Verfügbare Downloads ansehen",
     installer: "Installer .exe",
     portable: "Portable .zip",
     dismissBanner: "Downloadhinweis schließen",
@@ -951,6 +961,13 @@ function updateLocationStatus() {
   }
 }
 
+function saveNativePreferences(payload) {
+  if (window.__wowbrowser?.native !== true) return;
+  try {
+    window.location.href = "wowbrowser://prefs/save?payload=" + encodeURIComponent(JSON.stringify(payload));
+  } catch (e) {}
+}
+
 async function refreshApproximateCountry() {
   if (preferences.approximateLocation !== true)
     return;
@@ -975,12 +992,10 @@ async function refreshApproximateCountry() {
     preferences.detectedRegion = regionForCountry(countryCode);
     locationLookupFailed = false;
     savePreferences();
-    try {
-      const nativePayload = { approximateLocation: true };
-      if (preferences.countryCode) nativePayload.countryCode = preferences.countryCode;
-      if (preferences.detectedRegion) nativePayload.detectedRegion = preferences.detectedRegion;
-      window.location.href = "wowbrowser://prefs/save?payload=" + encodeURIComponent(JSON.stringify(nativePayload));
-    } catch (e) {}
+    const nativePayload = { approximateLocation: true };
+    if (preferences.countryCode) nativePayload.countryCode = preferences.countryCode;
+    if (preferences.detectedRegion) nativePayload.detectedRegion = preferences.detectedRegion;
+    saveNativePreferences(nativePayload);
     updateLocationStatus();
     renderAll();
   } catch {
@@ -1001,12 +1016,10 @@ function resolveLocationConsent(allowed) {
     preferences.region = "auto";
     document.querySelector("#preferred-region").value = "auto";
     savePreferences();
-    try {
-      const nativePayload = { approximateLocation: true };
-      if (preferences.countryCode) nativePayload.countryCode = preferences.countryCode;
-      if (preferences.detectedRegion) nativePayload.detectedRegion = preferences.detectedRegion;
-      window.location.href = "wowbrowser://prefs/save?payload=" + encodeURIComponent(JSON.stringify(nativePayload));
-    } catch (e) {}
+    const nativePayload = { approximateLocation: true };
+    if (preferences.countryCode) nativePayload.countryCode = preferences.countryCode;
+    if (preferences.detectedRegion) nativePayload.detectedRegion = preferences.detectedRegion;
+    saveNativePreferences(nativePayload);
     updateLocationStatus();
     renderAll();
     void refreshApproximateCountry();
@@ -1022,9 +1035,7 @@ function resolveLocationConsent(allowed) {
     document.querySelector("#preferred-region").value = "all";
   }
   savePreferences();
-  try {
-    window.location.href = "wowbrowser://prefs/save?payload=" + encodeURIComponent(JSON.stringify({}));
-  } catch (e) {}
+  saveNativePreferences({});
   updateLocationStatus();
   renderAll();
 }
@@ -1036,13 +1047,13 @@ function showLocationConsent() {
 
 function parseSemanticVersion(value) {
   if (typeof value !== "string") return null;
-  const match = /^v?(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?$/.exec(value.trim());
+  const match = /^v?(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:\.(0|[1-9]\d*))?(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?$/.exec(value.trim());
   if (!match) return null;
-  const prerelease = match[4] ? match[4].split(".") : null;
+  const prerelease = match[5] ? match[5].split(".") : null;
   if (prerelease && prerelease.some((identifier) => /^\d+$/.test(identifier) && identifier.length > 1 && identifier.startsWith("0")))
     return null;
   return {
-    core: [BigInt(match[1]), BigInt(match[2]), BigInt(match[3])],
+    core: [BigInt(match[1]), BigInt(match[2]), BigInt(match[3]), BigInt(match[4] || "0")],
     prerelease
   };
 }
@@ -1120,7 +1131,7 @@ function presentPendingUpdate() {
 }
 
 async function checkForAppUpdate() {
-  if (window.__wowbrowser?.native !== true) return;
+  if (window.__wowbrowser?.native !== true || window.__wowbrowser?.platform !== "windows") return;
   try {
     const response = await fetch("version.json", { cache: "no-store", credentials: "omit" });
     if (!response.ok) return;
@@ -1131,8 +1142,6 @@ async function checkForAppUpdate() {
     document.querySelector("#update-installed-version").textContent = String(installedVersion).trim();
     document.querySelector("#update-available-version").textContent = manifest.version;
     document.querySelector("#update-release-link").href = manifest.releaseUrl;
-    document.querySelector("#update-installer-link").href = manifest.installer;
-    document.querySelector("#update-portable-link").href = manifest.portable;
     pendingUpdate = manifest;
     presentPendingUpdate();
   } catch {
