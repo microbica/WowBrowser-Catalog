@@ -1,27 +1,230 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>WowBrowser Catalog</title>
-  <style>
-    body { font-family: system-ui, sans-serif; background: #0b1220; color: #e6edf7; padding: 24px; }
-    h1 { color: #d29b4e; }
-    .card { background: #162033; border: 1px solid #2a3a55; border-radius: 12px; padding: 16px; margin: 12px 0; }
-    a { color: #6fc2bd; }
-    code { background: #0b1220; padding: 2px 6px; border-radius: 4px; }
-  </style>
-</head>
-<body>
-  <h1>WowBrowser — Catálogo</h1>
-  <p>Feed JSON: <a href="./catalog.json">catalog.json</a></p>
-  <p>La app WowBrowser descarga este archivo para poblar el catálogo. Para añadir servidores, edita <code>catalog.json</code> y haz commit.</p>
-  <div id="list"></div>
-  <script>
-    fetch('./catalog.json').then(r=>r.json()).then(list=>{
-      const el=document.getElementById('list');
-      el.innerHTML=list.map(s=>`<div class="card"><h3>${s.name}</h3><p>${s.description||''}</p><p><a href="${s.playUrl}" target="_blank">${s.playUrl}</a></p><small>${s.language} · ${s.region} · ${s.version}</small></div>`).join('');
-    }).catch(e=>{ el.textContent='Error: '+e; });
-  </script>
-</body>
+<!doctype html>
+<html lang="es" class="is-loading">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src https://ipapi.co https:; object-src 'none'; base-uri 'none'; form-action 'self'">    <title>WowBrowser</title>
+    <link rel="icon" type="image/svg+xml" href="assets/wowbrowser-mark.svg">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="startup-splash" id="startup-splash" role="status" aria-live="polite">
+      <div class="splash-map" aria-hidden="true"></div>
+      <div class="splash-vignette" aria-hidden="true"></div>
+      <div class="splash-content">
+        <div class="splash-brand">
+          <img src="assets/wowbrowser-mark.svg" alt="">
+          <span>WOW<span> BROWSER</span></span>
+        </div>
+        <div class="splash-copy">
+          <span class="splash-eyebrow"><span></span> PREPARANDO EL VIAJE</span>
+          <h1>Los caminos<br>vuelven a abrirse.</h1>
+          <p>Reuniendo tus mundos favoritos en un solo lugar.</p>
+        </div>
+        <div class="splash-footer">
+          <div class="traveler-tip">
+            <div class="tip-heading"><span class="tip-star">✦</span> CONSEJO DEL VIAJERO</div>
+            <p id="loading-tip">Revisa tu equipo antes de aventurarte en una mazmorra.</p>
+          </div>
+          <div class="loading-status">
+            <div class="loading-label"><span>PREPARANDO EL PORTAL</span><span id="splash-percent">0%</span></div>
+            <div class="loading-track" role="progressbar" aria-label="Progreso estimado de inicio" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+              <span id="splash-progress"></span>
+            </div>
+            <div class="splash-caption">Un momento, aventurero…</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="app-shell" inert>
+      <aside class="sidebar">
+        <a class="brand" href="#" aria-label="WowBrowser, inicio" data-view="home">
+          <img class="brand-mark" src="assets/wowbrowser-mark.svg" alt="">
+          <span>Wow<span class="brand-light">Browser</span></span>
+        </a>
+
+        <div class="nav-label">EXPLORAR</div>
+        <nav class="main-nav" aria-label="Navegación principal">
+          <button class="nav-item active" data-view="home"><span>⌂</span> Inicio</button>
+          <button class="nav-item" data-view="catalog"><span>▦</span> Catálogo</button>
+          <button class="nav-item" data-view="favorites"><span>♡</span> Favoritos</button>
+        </nav>
+
+        <div class="sidebar-bottom">
+          <div class="privacy-note">
+            <span class="privacy-dot"></span>
+            <div><strong id="location-status">Ubicación aproximada desactivada</strong><small id="location-detail">La región se elige manualmente</small></div>
+          </div>
+          <button class="settings-link" data-view="settings"><span>⚙</span> Preferencias</button>
+          <div class="version-label">WOWBROWSER · VISTA PREVIA</div>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <div class="breadcrumb"><span>WowBrowser</span><span class="crumb-separator">/</span><strong id="page-title">Inicio</strong></div>
+          <button class="add-server-button" id="open-add-server"><span>＋</span> Añadir servidor</button>
+        </header>
+
+        <section class="view active" id="view-home">
+          <div class="hero">
+            <div class="hero-copy">
+              <span class="eyebrow"><span class="live-dot"></span> TU PRÓXIMA AVENTURA EMPIEZA AQUÍ</span>
+              <h1>Encuentra tu<br><span>próximo mundo.</span></h1>
+              <p>Encuentra servidores por idioma, expansión y región; abre sus clientes web desde un solo lugar.</p>
+              <button class="primary-button" data-view="catalog">Explorar servidores <span>→</span></button>
+            </div>
+            <div class="hero-art" aria-hidden="true">
+              <div class="art-orbit orbit-one"></div>
+              <div class="art-orbit orbit-two"></div>
+              <div class="art-sigil">✦</div>
+              <div class="art-glow"></div>
+            </div>
+          </div>
+
+          <div class="section-heading">
+            <div><span class="eyebrow">SELECCIÓN PARA TI</span><h2>Recomendados</h2></div>
+            <button class="text-button" data-view="catalog">Ver catálogo <span>→</span></button>
+          </div>
+          <div class="server-grid" id="home-server-grid"></div>
+
+          <div class="prototype-note">
+            <span class="note-icon">ⓘ</span>
+            <p><strong>Vista previa comunitaria.</strong> WowBrowser no está afiliado a Blizzard. Comprueba las reglas, la seguridad y la legalidad de cada servidor antes de jugar.</p>
+          </div>
+        </section>
+
+        <section class="view" id="view-catalog">
+          <div class="page-intro">
+            <span class="eyebrow">DESCUBRE NUEVOS MUNDOS</span>
+            <h1>Catálogo</h1>
+            <p>Filtra por idioma, versión del juego y región del servidor.</p>
+          </div>
+          <div class="catalog-controls">
+            <label class="search-box"><span>⌕</span><input id="server-search" type="search" placeholder="Buscar nombre, idioma o versión…" autocomplete="off"></label>
+            <label class="select-wrap"><span class="sr-only">Idioma</span>
+              <select id="language-filter" aria-label="Filtrar por idioma">
+                <option value="all">Todos los idiomas</option>
+                <option value="es">Español</option>
+                <option value="en">Inglés</option>
+                <option value="pt">Portugués</option>
+                <option value="fr">Francés</option>
+                <option value="de">Alemán</option>
+                <option value="other">Otro</option>
+              </select>
+            </label>
+            <label class="select-wrap"><span class="sr-only">Versión del juego</span>
+              <select id="version-filter" aria-label="Filtrar por versión del juego">
+                <option value="all">Todas las versiones</option>
+                <option value="classic">Classic Era / Vanilla</option>
+                <option value="hardcore">Classic Hardcore</option>
+                <option value="sod">Season of Discovery</option>
+                <option value="tbc">The Burning Crusade</option>
+                <option value="wotlk">Wrath of the Lich King</option>
+                <option value="cata">Cataclysm</option>
+                <option value="mop">Mists of Pandaria</option>
+                <option value="wod">Warlords of Draenor</option>
+                <option value="legion">Legion</option>
+                <option value="bfa">Battle for Azeroth</option>
+                <option value="shadowlands">Shadowlands</option>
+                <option value="dragonflight">Dragonflight</option>
+                <option value="warwithin">The War Within</option>
+                <option value="midnight">Midnight</option>
+                <option value="forever">Forever / Custom</option>
+                <option value="other">Sin especificar</option>
+              </select>
+            </label>
+            <label class="select-wrap"><span class="sr-only">Región</span>
+              <select id="region-filter" aria-label="Filtrar por región">
+                <option value="all">Cualquier región</option>
+                <option value="americas">América</option>
+                <option value="europe">Europa</option>
+                <option value="asia">Asia</option>
+                <option value="oceania">Oceanía</option>
+                <option value="other">Sin especificar</option>
+              </select>
+            </label>
+          </div>
+          <div class="catalog-caption">
+            <span id="server-count">0 servidores</span>
+            <label class="sort-control">Ordenar
+              <select id="sort-filter" aria-label="Ordenar servidores">
+                <option value="recommended">Recomendados</option>
+                <option value="most-played" disabled>Más jugados · próximamente</option>
+              </select>
+            </label>
+          </div>
+          <div class="server-grid" id="catalog-server-grid"></div>
+          <div class="empty-state hidden" id="empty-state"><div>⌕</div><h3>No encontramos servidores</h3><p>Prueba con otro término o añade un servidor.</p></div>
+          <div class="catalog-footnote">Los votos diarios y “Más jugados” se activarán al conectar el catálogo a un servicio central. Este prototipo no registra ni simula votos.</div>
+        </section>
+
+        <section class="view" id="view-favorites">
+          <div class="page-intro"><span class="eyebrow">TUS MUNDOS GUARDADOS</span><h1>Favoritos</h1><p>Acceso rápido a los servidores que quieres tener a mano.</p></div>
+          <div class="server-grid" id="favorites-server-grid"></div>
+          <div class="empty-state hidden" id="favorites-empty"><div>♡</div><h3>Aún no tienes favoritos</h3><p>Guarda un servidor con el icono del corazón.</p></div>
+        </section>
+
+        <section class="view" id="view-settings">
+          <div class="page-intro"><span class="eyebrow">A TU MANERA</span><h1>Preferencias</h1><p>Personaliza las sugerencias. Estos ajustes se guardan en este dispositivo.</p></div>
+          <div class="settings-card">
+            <label class="setting-row"><span><strong>Idioma de la interfaz</strong><small>Cambia el idioma de los menús y textos.</small></span>
+              <select id="ui-language">
+                <option value="es">Español</option>
+                <option value="en">Inglés</option>
+                <option value="pt">Portugués</option>
+                <option value="fr">Francés</option>
+                <option value="de">Alemán</option>
+              </select>
+            </label>
+            <label class="setting-row"><span><strong>Idioma de los servidores</strong><small>Prioriza servidores que ofrezcan este idioma.</small></span>
+              <select id="preferred-language"><option value="es">Español</option><option value="en">Inglés</option><option value="pt">Portugués</option><option value="fr">Francés</option><option value="de">Alemán</option><option value="any">Cualquier idioma</option></select>
+            </label>
+            <label class="setting-row"><span><strong>Región preferida</strong><small>Se usa solo para ordenar las recomendaciones.</small></span>
+              <select id="preferred-region"><option value="auto">Automática (país aproximado)</option><option value="all">Cualquier región</option><option value="americas">América</option><option value="europe">Europa</option><option value="asia">Asia</option><option value="oceania">Oceanía</option></select>
+            </label>
+            <label class="setting-row"><span><strong>Versión preferida</strong><small>Prioriza la expansión que quieres jugar.</small></span>
+              <select id="preferred-version"><option value="all">Cualquier versión</option><option value="classic">Classic Era / Vanilla</option><option value="hardcore">Classic Hardcore</option><option value="sod">Season of Discovery</option><option value="tbc">The Burning Crusade</option><option value="wotlk">Wrath of the Lich King</option><option value="cata">Cataclysm</option><option value="mop">Mists of Pandaria</option><option value="wod">Warlords of Draenor</option><option value="legion">Legion</option><option value="bfa">Battle for Azeroth</option><option value="shadowlands">Shadowlands</option><option value="dragonflight">Dragonflight</option><option value="warwithin">The War Within</option><option value="midnight">Midnight</option><option value="forever">Forever / Custom</option><option value="other">Sin especificar</option></select>
+            </label>
+            <label class="setting-row location-row" for="location-toggle"><span><strong>Usar país aproximado</strong><small>Solo país/continente por IP; no GPS ni coordenadas precisas.</small></span>
+              <input id="location-toggle" class="location-toggle" type="checkbox" aria-label="Permitir país aproximado por IP">
+            </label>
+          </div>
+          <div class="settings-footnote">Si lo permites, ipapi.co recibe tu IP pública para devolver únicamente el código de país. WowBrowser no guarda tu IP y puedes desactivarlo aquí.</div>
+        </section>
+
+        <footer class="app-footer">
+          <span>Hecho para explorar con calma.</span>
+          <a class="footer-credit" href="https://pixplix.com" target="_blank" rel="noopener noreferrer">Desarrollado por <strong>PixPlix</strong></a>
+        </footer>
+      </main>
+    </div>
+
+    <dialog class="modal" id="add-server-dialog">
+      <form id="add-server-form" method="dialog">
+        <div class="modal-heading"><div><span class="eyebrow">AÑADIR A TU LISTA</span><h2>Nuevo servidor</h2></div><button class="icon-button" type="button" id="close-add-server" aria-label="Cerrar">×</button></div>
+        <label class="form-field">Nombre<input name="name" required maxlength="48" placeholder="Nombre del servidor"></label>
+        <label class="form-field">URL del cliente web<input name="url" type="url" required placeholder="https://ejemplo.com/play"></label>
+        <div class="form-columns">
+          <label class="form-field">Idioma<select name="language"><option value="es">Español</option><option value="en">Inglés</option><option value="pt">Portugués</option><option value="fr">Francés</option><option value="de">Alemán</option><option value="other">Otro / sin especificar</option></select></label>
+          <label class="form-field">Región<select name="region"><option value="americas">América</option><option value="europe">Europa</option><option value="asia">Asia</option><option value="oceania">Oceanía</option><option value="other">Sin especificar</option></select></label>
+        </div>
+        <label class="form-field">Versión del juego<select name="version"><option value="other">Sin especificar</option><option value="classic">Classic Era / Vanilla</option><option value="hardcore">Classic Hardcore</option><option value="sod">Season of Discovery</option><option value="tbc">The Burning Crusade</option><option value="wotlk">Wrath of the Lich King</option><option value="cata">Cataclysm</option><option value="mop">Mists of Pandaria</option><option value="wod">Warlords of Draenor</option><option value="legion">Legion</option><option value="bfa">Battle for Azeroth</option><option value="shadowlands">Shadowlands</option><option value="dragonflight">Dragonflight</option><option value="warwithin">The War Within</option><option value="midnight">Midnight</option><option value="forever">Forever / Custom</option></select></label>
+        <p class="form-hint">Por ahora se guardará solo en este dispositivo. Verifica que confías en el sitio antes de abrirlo.</p>
+        <div class="modal-actions"><button class="secondary-button" type="button" id="cancel-add-server">Cancelar</button><button class="primary-button" type="submit">Guardar servidor <span>→</span></button></div>
+      </form>
+    </dialog>
+    <dialog class="modal location-consent-dialog" id="location-consent-dialog" aria-labelledby="location-consent-title">
+      <div class="modal-heading"><div><span class="eyebrow">PRIVACIDAD</span><h2 id="location-consent-title">¿Usar tu país aproximado?</h2></div></div>
+       <p class="form-hint">Si aceptas, en cada inicio consultaremos ipapi.co para obtener solo tu país aproximado. El servicio recibe tu IP pública. WowBrowser no la guarda ni solicita GPS o coordenadas precisas. Guardaremos el permiso. Si eliges «Ahora no», volveremos a preguntarte al próximo inicio. Puedes desactivarlo en Preferencias.</p>
+      <div class="modal-actions">
+        <button class="secondary-button" type="button" id="deny-location">Ahora no</button>
+        <button class="primary-button" type="button" id="allow-location">Permitir país aproximado <span>→</span></button>
+      </div>
+    </dialog>
+    <script src="splash.js"></script>
+    <script src="app.js"></script>
+  </body>
 </html>

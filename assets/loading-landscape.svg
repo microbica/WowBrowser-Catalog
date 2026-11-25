@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" fill="none">
+  <defs>
+    <linearGradient id="sky" x1="960" y1="0" x2="960" y2="760" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#152d3b"/>
+      <stop offset=".55" stop-color="#49616a"/>
+      <stop offset="1" stop-color="#d0a96d"/>
+    </linearGradient>
+    <linearGradient id="mountain" x1="1030" y1="260" x2="1000" y2="810" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#829294"/>
+      <stop offset=".5" stop-color="#485b5e"/>
+      <stop offset="1" stop-color="#26393b"/>
+    </linearGradient>
+    <linearGradient id="land" x1="970" y1="520" x2="1040" y2="1060" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#53624e"/>
+      <stop offset=".44" stop-color="#32483d"/>
+      <stop offset="1" stop-color="#142b2b"/>
+    </linearGradient>
+    <linearGradient id="river" x1="1014" y1="600" x2="1033" y2="1080" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#d8c697"/>
+      <stop offset=".4" stop-color="#638d8d"/>
+      <stop offset="1" stop-color="#294d59"/>
+    </linearGradient>
+    <radialGradient id="dawn" cx="0" cy="0" r="1" gradientTransform="matrix(0 360 -610 0 1285 380)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#efc77c" stop-opacity=".6"/>
+      <stop offset="1" stop-color="#dfa961" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="shade" x1="960" y1="0" x2="960" y2="1080" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#071019" stop-opacity=".12"/>
+      <stop offset=".65" stop-color="#071019" stop-opacity="0"/>
+      <stop offset="1" stop-color="#071019" stop-opacity=".54"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#sky)"/>
+  <ellipse cx="1285" cy="380" rx="610" ry="360" fill="url(#dawn)"/>
+  <circle cx="1287" cy="325" r="65" fill="#f0d298" fill-opacity=".73"/>
+  <circle cx="1313" cy="307" r="60" fill="#72818a" fill-opacity=".7"/>
+
+  <path d="m0 605 179-151 115 74 180-222 145 159 153-236 146 201 159-190 142 154 156-231 173 202 153-124 219 192v274H0V605Z" fill="#34474f" fill-opacity=".78"/>
+  <path d="m0 622 184-168 114 73 176-214 145 159 153-217 146 187 159-179 142 137 153-203 173 180 153-112 222 178v273H0V622Z" fill="url(#mountain)"/>
+  <path d="m474 313 37 49 36 39-66-16-34 28-20-37 47-63Zm265-103 43 58 56 50-78-14-36 31-25-40 40-85Zm302 28 37 47 44 30-60-6-31 30-24-36 34-65Zm300-93 52 59 56 33-78-8-40 27-22-42 32-69Z" fill="#d1c8b1" fill-opacity=".72"/>
+  <path d="M0 711c150-95 316-133 468-93 139 37 238 82 370 29 160-64 285-180 453-115 157 61 238 38 365-36 100-58 183-44 264 5v579H0V711Z" fill="#465a4d"/>
+  <path d="M0 763c153-97 308-112 468-67 152 43 253 101 405 40 151-61 280-151 421-100 155 56 279 62 403-18 88-57 154-66 223-42v504H0V763Z" fill="url(#land)"/>
+  <path d="M1070 547c-32 82-11 146 31 204 54 75 48 112-24 185-70 70-130 133-87 228l104 60c-64-128 15-185 82-267 72-88 63-147 6-230-40-58-48-116-10-185l-102 5Z" fill="url(#river)" fill-opacity=".76"/>
+  <path d="M1078 557c-32 82-9 138 33 196 52 72 42 124-31 199-57 59-108 114-87 192" stroke="#e2d3a6" stroke-opacity=".48" stroke-width="6"/>
+
+  <g fill="#192e2d">
+    <path d="m196 755 62-143 62 143h-39l57 85H178l57-85h-39Zm210 62 55-128 55 128h-35l49 75H392l49-75h-35Zm1075-91 67-157 67 157h-42l62 91h-174l62-91h-42Zm166 92 52-122 52 122h-33l47 70h-132l47-70h-33Zm131-109 71-166 71 166h-45l66 98h-184l66-98h-45Z"/>
+  </g>
+  <g fill="#203a36" opacity=".95">
+    <path d="m20 889 53-124 53 124H92l45 67H9l45-67H20Zm165 0 53-124 53 124h-34l45 67h-128l45-67h-34Zm235 52 59-138 59 138h-37l50 74H407l50-74h-37Zm1214-47 58-137 58 137h-36l49 74h-142l49-74h-36Zm175 37 61-143 61 143h-39l51 77h-146l51-77h-39Zm184-7 55-130 55 130h-35l47 70h-134l47-70h-35Z"/>
+  </g>
+
+  <g stroke="#d9c28c" stroke-opacity=".24" stroke-width="2">
+    <path d="M126 1015c215-82 384-95 531-31 111 48 184 42 278-28 123-91 206-100 353-55 156 48 276 32 455-54"/>
+    <path d="M59 1055c234-87 427-94 576-28 115 51 199 50 306-25 121-85 202-94 330-54 166 52 319 39 555-79"/>
+    <path d="M0 978c189-82 339-99 481-40 131 54 226 53 340-26 127-88 206-104 363-61 170 47 310 25 471-48"/>
+    <path d="M1362 664c120-61 263-48 392 5"/>
+    <path d="M1430 711c91-41 185-35 292 5"/>
+  </g>
+
+  <path d="M760 771c61-67 111-82 172-83" stroke="#dfc07b" stroke-opacity=".78" stroke-width="3" stroke-dasharray="3 12" stroke-linecap="round"/>
+  <circle cx="756" cy="775" r="8" fill="#f0d394"/>
+  <circle cx="756" cy="775" r="19" stroke="#f0d394" stroke-opacity=".5" stroke-width="2"/>
+  <path d="m1201 642 4 12 12 4-12 4-4 12-4-12-12-4 12-4 4-12Z" fill="#ffe2a0" fill-opacity=".82"/>
+  <rect width="1920" height="1080" fill="url(#shade)"/>
+</svg>

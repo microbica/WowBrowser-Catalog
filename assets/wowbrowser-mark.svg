@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+  <defs>
+    <linearGradient id="frame" x1="20" y1="14" x2="105" y2="114" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f4d48f"/>
+      <stop offset=".48" stop-color="#d29b4e"/>
+      <stop offset="1" stop-color="#84572d"/>
+    </linearGradient>
+    <linearGradient id="gate" x1="64" y1="28" x2="64" y2="100" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6fc2bd"/>
+      <stop offset=".5" stop-color="#306c79"/>
+      <stop offset="1" stop-color="#172d43"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientTransform="matrix(0 51 -45 0 64 62)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#b4eadb" stop-opacity=".75"/>
+      <stop offset="1" stop-color="#8fd8cd" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="round">
+      <rect x="5" y="5" width="118" height="118" rx="34"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#round)">
+    <rect x="5" y="5" width="118" height="118" rx="34" fill="#101a25"/>
+    <circle cx="64" cy="63" r="57" fill="url(#glow)" opacity=".32"/>
+    <circle cx="64" cy="64" r="48" stroke="url(#frame)" stroke-width="3"/>
+    <circle cx="64" cy="64" r="40" stroke="#e8c581" stroke-opacity=".25"/>
+    <path d="M34 93V62c0-17 13.4-30 30-30s30 13 30 30v31H34Z" fill="url(#gate)" stroke="url(#frame)" stroke-width="4"/>
+    <path d="M43 91V63c0-12 9-21 21-21s21 9 21 21v28H43Z" fill="#183e4b" fill-opacity=".72"/>
+    <path d="M45 86c5-9 12-13 19-12 8 1 12 5 19 13v8H45v-9Z" fill="#172b38" fill-opacity=".82"/>
+    <path d="M60 63l4-12 4 12 11 4-11 4-4 12-4-12-11-4 11-4Z" fill="#ffe5a6"/>
+    <path d="M64 17l2.2 7.4L74 27l-7.8 2.6L64 37l-2.2-7.4L54 27l7.8-2.6L64 17Z" fill="#f4d38d"/>
+    <path d="M26 102c12-7 25-10 38-10s26 3 38 10" stroke="#e5b970" stroke-opacity=".48" stroke-width="2"/>
+    <circle cx="27" cy="64" r="2" fill="#f0cd89"/>
+    <circle cx="101" cy="64" r="2" fill="#f0cd89"/>
+  </g>
+</svg>
