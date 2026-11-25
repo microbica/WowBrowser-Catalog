@@ -1,0 +1,18 @@
+name = "wowbrowser-click-counts"
+main = "src/index.js"
+compatibility_date = "2026-11-25"
+workers_dev = true
+
+[[d1_databases]]
+binding = "DB"
+database_name = "wowbrowser-click-counts"
+database_id = "2d980937-5714-471c-95e5-b1aa483836e9"
+
+[vars]
+SERVER_IDS = "grimfall-wow,wow-peru-land"
+ALLOWED_ORIGINS = "https://wowbrowser.pixplix.com,http://localhost:8787,http://127.0.0.1:8787"
+
+# Cloudflare intercepta únicamente /api/* sin cambiar el hosting del catálogo.
+routes = [
+  { pattern = "wowbrowser.pixplix.com/api/*", zone_name = "pixplix.com" }
+]

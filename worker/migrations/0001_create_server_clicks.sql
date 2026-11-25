@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS server_clicks (
+  server_id TEXT PRIMARY KEY,
+  clicks INTEGER NOT NULL DEFAULT 0 CHECK (clicks >= 0)
+) WITHOUT ROWID;

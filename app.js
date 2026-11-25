@@ -3,7 +3,7 @@
 const STORAGE_SERVERS = "wowbrowser.servers.v1";const STORAGE_FAVORITES = "wowbrowser.favorites.v1";
 const STORAGE_PREFERENCES = "wowbrowser.preferences.v1";
 const STORAGE_REMOTE_CATALOG = "wowbrowser.remoteCatalog.v1";
-const STORAGE_VISITS = "wowbrowser.visits.v1";
+const CLICK_STATS_URL = "/api";
 const RELEASE_URL_LATEST = "https://github.com/microbica/WowBrowser-Releases/releases/latest";
 const WINDOWS_DOWNLOADS_LATEST = {
   installer: RELEASE_URL_LATEST + "/download/WowBrowser-win-Setup.exe",
@@ -567,11 +567,9 @@ const savedServers = readJson(STORAGE_SERVERS, []);
 let userServers = Array.isArray(savedServers) ? savedServers.map(normalizeServer) : [];
 const cachedRemoteCatalog = readJson(STORAGE_REMOTE_CATALOG, []);
 let remoteServers = Array.isArray(cachedRemoteCatalog) ? cachedRemoteCatalog.map(normalizeServer) : [];let favorites = new Set(readJson(STORAGE_FAVORITES, []));
-const savedVisits = readJson(STORAGE_VISITS, {});
-let visitCounts = savedVisits && typeof savedVisits === "object" && !Array.isArray(savedVisits) ? { ...savedVisits } : {};
-for (const [id, count] of Object.entries(visitCounts)) {
-  if (!Number.isFinite(count) || count < 0) delete visitCounts[id];
-}
+let clickCounts = {};
+let clickStatsLoaded = false;
+try { localStorage.removeItem("wowbrowser.visits.v1"); } catch (error) {}
 const storedPreferencesValue = readJson(STORAGE_PREFERENCES, {});
 const storedPreferences = storedPreferencesValue && typeof storedPreferencesValue === "object" &&
   !Array.isArray(storedPreferencesValue) ? storedPreferencesValue : {};
@@ -669,7 +667,9 @@ function serverCard(server) {
     text["Servidor añadido por ti."] || "Servidor añadido por ti.";
   const faviconUrl = serverFaviconUrl(server);
   const initial = escapeHtml((server.name || "?").trim().charAt(0).toUpperCase() || "✧");
-  const visits = Number.isFinite(visitCounts[server.id]) ? visitCounts[server.id] : 0;
+  const clickKnown = clickStatsLoaded && Number.isFinite(clickCounts[server.id]);
+  const clicks = clickKnown ? clickCounts[server.id] : 0;
+  const clickLabel = clickKnown ? formatClickCount(clicks) : "—";
   let host = "";
   try {
     host = new URL(url).hostname.replace(/^www\./, "");
@@ -694,7 +694,7 @@ function serverCard(server) {
       </div>
       <p class="server-description">${escapeHtml(description)}</p>
       <div class="server-meta"><span class="meta-chip">${escapeHtml(lang)}</span><span class="meta-chip region">${escapeHtml(region)}</span><span class="meta-chip version">${escapeHtml(version)}</span></div>
-      <div class="server-actions"><a class="play-link" href="${escapeHtml(url)}" data-launch="${escapeHtml(server.id)}">${escapeHtml(translateUiText("Abrir cliente"))} <span>→</span></a><span class="server-visits ${visits > 0 ? "has-visits" : ""}" data-visits-for="${escapeHtml(server.id)}" title="${escapeHtml((visitWords[uiLanguage] || visitWords.es)[2])}"><span class="visits-dot" aria-hidden="true"></span><span class="visits-number">${visits}</span> <span class="visits-word">${escapeHtml(visitWord(visits))}</span></span></div>
+      <div class="server-actions"><a class="play-link" href="${escapeHtml(url)}" data-launch="${escapeHtml(server.id)}">${escapeHtml(translateUiText("Abrir cliente"))} <span>→</span></a><span class="server-clicks ${clicks > 0 ? "has-clicks" : ""}" data-clicks-for="${escapeHtml(server.id)}" title="${escapeHtml((clickWords[uiLanguage] || clickWords.es)[2])}"><span class="clicks-dot" aria-hidden="true"></span><span class="clicks-number">${clickLabel}</span> <span class="clicks-word">${escapeHtml(clickWord(clicks))}</span></span></div>
     </div>`;
 
   const faviconImg = card.querySelector(".server-favicon");
@@ -731,33 +731,70 @@ function translateUiText(text) {
   return uiTextByLanguage[uiLanguage]?.[text] || text;
 }
 
-const visitWords = {
-  es: ["entrada", "entradas", "Entradas registradas en este dispositivo"],
-  en: ["visit", "visits", "Visits recorded on this device"],
-  pt: ["entrada", "entradas", "Entradas registradas neste dispositivo"],
-  fr: ["entrée", "entrées", "Entrées enregistrées sur cet appareil"],
-  de: ["Aufruf", "Aufrufe", "Aufrufe auf diesem Gerät"]
+const clickWords = {
+  es: ["clic", "clics", "Clics globales al abrir este servidor"],
+  en: ["click", "clicks", "Global clicks to open this server"],
+  pt: ["clique", "cliques", "Cliques globais para abrir este servidor"],
+  fr: ["clic", "clics", "Clics globaux pour ouvrir ce serveur"],
+  de: ["Klick", "Klicks", "Globale Klicks zum Öffnen dieses Servers"]
 };
-function visitWord(count) {
-  const words = visitWords[uiLanguage] || visitWords.es;
+function clickWord(count) {
+  const words = clickWords[uiLanguage] || clickWords.es;
   return words[count === 1 ? 0 : 1];
 }
-function updateVisitDisplays(id) {
-  const count = Number.isFinite(visitCounts[id]) ? visitCounts[id] : 0;
-  document.querySelectorAll(".server-visits").forEach((element) => {
-    if (element.dataset.visitsFor !== id) return;
-    element.querySelector(".visits-number").textContent = String(count);
-    element.querySelector(".visits-word").textContent = visitWord(count);
-    element.classList.toggle("has-visits", count > 0);
+function formatClickCount(count) {
+  return new Intl.NumberFormat(uiLanguage).format(count);
+}
+function updateClickDisplays(id) {
+  const known = clickStatsLoaded && Number.isFinite(clickCounts[id]);
+  const count = known ? clickCounts[id] : 0;
+  document.querySelectorAll(".server-clicks").forEach((element) => {
+    if (element.dataset.clicksFor !== id) return;
+    element.querySelector(".clicks-number").textContent = known ? formatClickCount(count) : "—";
+    element.querySelector(".clicks-word").textContent = clickWord(count);
+    element.title = (clickWords[uiLanguage] || clickWords.es)[2];
+    element.classList.toggle("has-clicks", known && count > 0);
   });
 }
-function registerVisit(id) {
-  if (!id) return;
-  visitCounts[id] = (Number.isFinite(visitCounts[id]) ? visitCounts[id] : 0) + 1;
+function updateAllClickDisplays() {
+  document.querySelectorAll(".server-clicks").forEach((element) => {
+    updateClickDisplays(element.dataset.clicksFor);
+  });
+}
+async function loadClickStats() {
   try {
-    localStorage.setItem(STORAGE_VISITS, JSON.stringify(visitCounts));
+    const response = await fetch(CLICK_STATS_URL + "/stats", { cache: "no-store" });
+    if (!response.ok) return false;
+    const data = await response.json();
+    if (!data || !data.counts || typeof data.counts !== "object" || Array.isArray(data.counts))
+      return false;
+    const nextCounts = {};
+    for (const [id, count] of Object.entries(data.counts)) {
+      if (Number.isSafeInteger(count) && count >= 0) nextCounts[id] = count;
+    }
+    clickCounts = nextCounts;
+    clickStatsLoaded = true;
+    updateAllClickDisplays();
+    return true;
+  } catch {
+    return false;
+  }
+}
+function trackServerClick(id) {
+  if (!id || id.startsWith("custom-")) return;
+  if (clickStatsLoaded) {
+    clickCounts[id] = (Number.isFinite(clickCounts[id]) ? clickCounts[id] : 0) + 1;
+    updateClickDisplays(id);
+  }
+  const url = CLICK_STATS_URL + "/servers/" + encodeURIComponent(id) + "/click";
+  try {
+    if (navigator.sendBeacon && navigator.sendBeacon(url)) {
+      window.setTimeout(loadClickStats, 1200);
+      return;
+    }
   } catch (error) {}
-  updateVisitDisplays(id);
+  void fetch(url, { method: "POST", cache: "no-store", keepalive: true }).catch(() => {});
+  window.setTimeout(loadClickStats, 1200);
 }
 
 function replaceOptions(selector, entries, selectedValue) {
@@ -1205,7 +1242,7 @@ document.addEventListener("click", (event) => {
       event.preventDefault();
       return;
     }
-    registerVisit(launchLink.dataset.launch);
+    trackServerClick(launchLink.dataset.launch);
     // The native browser chrome keeps Home and Back available while the game runs.
   }
 });
@@ -1325,3 +1362,5 @@ if (shouldMigrateUiLanguage || shouldClearDeniedLocation)
   savePreferences();
 applyUiLanguage(uiLanguage);
 loadRemoteCatalog();
+void loadClickStats();
+window.setInterval(loadClickStats, 60000);

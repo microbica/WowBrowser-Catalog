@@ -1,0 +1,13 @@
+{
+  "name": "wowbrowser-click-counts",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy --route wowbrowser.pixplix.com/api/* --x-route-zones --zone-id da19cfb7dab611307628e9c6bc026ae9"
+  },
+  "devDependencies": {
+    "wrangler": "4.168.0"
+  }
+}

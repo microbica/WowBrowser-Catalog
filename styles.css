@@ -133,11 +133,11 @@ h1, h2, h3, p { margin-top: 0; }
 .server-actions { display: flex; align-items: center; justify-content: space-between; padding-top: 10px; border-top: 1px solid #2c2d33; }
 .play-link { display: inline-flex; align-items: center; gap: 7px; color: var(--accent-strong); font-size: 10px; font-weight: 600; text-decoration: none; }
 .play-link:hover { color: #ffd18d; }
-.server-visits { display: inline-flex; align-items: center; gap: 5px; color: #73747c; font-size: 9px; cursor: default; }
-.server-visits .visits-dot { width: 5px; height: 5px; border-radius: 50%; background: #8d8e94; }
-.server-visits .visits-number { font-weight: 700; font-variant-numeric: tabular-nums; }
-.server-visits.has-visits { color: #c4a36f; }
-.server-visits.has-visits .visits-dot { background: var(--accent); box-shadow: 0 0 8px #e7a94e80; }
+.server-clicks { display: inline-flex; align-items: center; gap: 5px; color: #73747c; font-size: 9px; cursor: default; }
+.server-clicks .clicks-dot { width: 5px; height: 5px; border-radius: 50%; background: #8d8e94; }
+.server-clicks .clicks-number { min-width: 8px; font-weight: 700; font-variant-numeric: tabular-nums; text-align: right; }
+.server-clicks.has-clicks { color: #c4a36f; }
+.server-clicks.has-clicks .clicks-dot { background: var(--accent); box-shadow: 0 0 8px #e7a94e80; }
 .prototype-note { display: flex; align-items: start; gap: 10px; padding: 12px 14px; margin-top: 16px; border: 1px solid #292a2e; border-radius: 8px; background: #17181b; }
 .note-icon { color: #b6a27e; font-size: 14px; }
 .prototype-note p { margin: 0; color: #85868d; font-size: 9px; line-height: 1.6; }

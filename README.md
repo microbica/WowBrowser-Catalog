@@ -10,6 +10,12 @@ Feed público y dashboard de WowBrowser. GitHub Pages lo publica tanto en `https
 
 Para actualizar el catálogo: edita `catalog.json`, commit y push. La app lo descarga al arrancar (con caché local para modo offline).
 
+## Contador global de clics
+
+Cada tarjeta muestra los clics globales acumulados al abrir ese servidor. El dashboard consulta `/api/stats` y envía un `POST` anónimo a `/api/servers/:id/click` cuando se pulsa «Abrir cliente». Los servidores añadidos manualmente no se contabilizan.
+
+El backend está en `worker/`: un Cloudflare Worker con D1 guarda únicamente el ID del servidor y un contador entero. No guarda IP, cookies, identificadores de usuario, URL completa ni historial. Las instrucciones de despliegue y la lista de servidores permitidos están en `worker/README.md` y `worker/wrangler.toml`.
+
 ## Banner externo
 
 Al terminar el splash (`wowbrowser:ready`), el dashboard muestra un banner fijo y cerrable solo si `window.__wowbrowser?.native !== true`. Su único CTA lleva a `update.html`, la página propia de descargas para Windows. El banner permanece oculto dentro de la app, reserva espacio para no tapar el catálogo y no guarda su cierre entre sesiones. Sus textos cambian con el idioma de la interfaz (es/en/pt/fr/de).
@@ -38,4 +44,5 @@ En `update.html`, los botones EXE/ZIP son descargas directas con atributo `downl
 node --check app.js
 node --check update.js
 node -e "JSON.parse(require('fs').readFileSync('version.json', 'utf8'))"
+cd worker && npm test
 ```
