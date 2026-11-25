@@ -1151,6 +1151,14 @@ async function checkForAppUpdate() {
 
 function refreshNativeFeatures() {
   if (!wowbrowserReady) return;
+  const appVersion = document.querySelector("#app-version");
+  if (window.__wowbrowser?.native === true && typeof window.__wowbrowser.version === "string") {
+    appVersion.textContent = "v" + window.__wowbrowser.version.trim();
+    appVersion.hidden = false;
+  } else {
+    appVersion.textContent = "";
+    appVersion.hidden = true;
+  }
   updateDownloadBanner();
   if (window.__wowbrowser?.native === true && !nativeUpdateCheckStarted) {
     nativeUpdateCheckStarted = true;

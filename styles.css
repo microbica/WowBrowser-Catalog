@@ -52,6 +52,8 @@ button { color: inherit; }
 .brand { display: flex; align-items: center; gap: 10px; margin: 0 0 49px 5px; color: var(--text); text-decoration: none; font-family: "Segoe UI", sans-serif; font-size: 16px; font-weight: 800; letter-spacing: -.7px; }
 .brand-mark { display: block; width: 34px; height: 34px; filter: drop-shadow(0 3px 10px #d6993c35); }
 .brand-light { color: #a5a5ad; font-weight: 500; }
+.brand-version { margin-left: 1px; padding: 2px 5px; border: 1px solid #3a3b42; border-radius: 5px; background: #17181c; color: #9b9ca5; font-size: 9px; font-weight: 600; letter-spacing: 0; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.brand-version[hidden] { display: none; }
 .nav-label, .eyebrow { color: var(--subtle); font-size: 10px; font-weight: 700; letter-spacing: 1.45px; }
 .nav-label { padding: 0 12px; margin-bottom: 11px; }
 .main-nav { display: grid; gap: 5px; }
