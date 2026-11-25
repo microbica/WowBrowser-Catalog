@@ -1,0 +1,24 @@
+[
+  {
+    "id": "grimfall-wow",
+    "name": "Grimfall WoW",
+    "playUrl": "https://www.grimfallwow.com/play",
+    "language": "en",
+    "region": "other",
+    "version": "other",
+    "description": "Explora el cliente web y consulta la información del servidor.",
+    "symbol": "GW",
+    "source": "catalog"
+  },
+  {
+    "id": "wow-peru-land",
+    "name": "WoW Perú Land",
+    "playUrl": "https://play.wowperuland.com/",
+    "language": "es",
+    "region": "americas",
+    "version": "other",
+    "description": "Una opción en español para descubrir desde el navegador.",
+    "symbol": "PL",
+    "source": "catalog"
+  }
+]

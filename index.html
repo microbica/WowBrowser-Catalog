@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WowBrowser Catalog</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #0b1220; color: #e6edf7; padding: 24px; }
+    h1 { color: #d29b4e; }
+    .card { background: #162033; border: 1px solid #2a3a55; border-radius: 12px; padding: 16px; margin: 12px 0; }
+    a { color: #6fc2bd; }
+    code { background: #0b1220; padding: 2px 6px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h1>WowBrowser — Catálogo</h1>
+  <p>Feed JSON: <a href="./catalog.json">catalog.json</a></p>
+  <p>La app WowBrowser descarga este archivo para poblar el catálogo. Para añadir servidores, edita <code>catalog.json</code> y haz commit.</p>
+  <div id="list"></div>
+  <script>
+    fetch('./catalog.json').then(r=>r.json()).then(list=>{
+      const el=document.getElementById('list');
+      el.innerHTML=list.map(s=>`<div class="card"><h3>${s.name}</h3><p>${s.description||''}</p><p><a href="${s.playUrl}" target="_blank">${s.playUrl}</a></p><small>${s.language} · ${s.region} · ${s.version}</small></div>`).join('');
+    }).catch(e=>{ el.textContent='Error: '+e; });
+  </script>
+</body>
+</html>
