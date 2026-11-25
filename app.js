@@ -787,6 +787,12 @@ async function refreshApproximateCountry() {
     preferences.detectedRegion = regionForCountry(countryCode);
     locationLookupFailed = false;
     savePreferences();
+    try {
+      const nativePayload = { approximateLocation: true };
+      if (preferences.countryCode) nativePayload.countryCode = preferences.countryCode;
+      if (preferences.detectedRegion) nativePayload.detectedRegion = preferences.detectedRegion;
+      window.location.href = "wowbrowser://prefs/save?payload=" + encodeURIComponent(JSON.stringify(nativePayload));
+    } catch (e) {}
     updateLocationStatus();
     renderAll();
   } catch {
@@ -807,6 +813,12 @@ function resolveLocationConsent(allowed) {
     preferences.region = "auto";
     document.querySelector("#preferred-region").value = "auto";
     savePreferences();
+    try {
+      const nativePayload = { approximateLocation: true };
+      if (preferences.countryCode) nativePayload.countryCode = preferences.countryCode;
+      if (preferences.detectedRegion) nativePayload.detectedRegion = preferences.detectedRegion;
+      window.location.href = "wowbrowser://prefs/save?payload=" + encodeURIComponent(JSON.stringify(nativePayload));
+    } catch (e) {}
     updateLocationStatus();
     renderAll();
     void refreshApproximateCountry();
@@ -822,6 +834,9 @@ function resolveLocationConsent(allowed) {
     document.querySelector("#preferred-region").value = "all";
   }
   savePreferences();
+  try {
+    window.location.href = "wowbrowser://prefs/save?payload=" + encodeURIComponent(JSON.stringify({}));
+  } catch (e) {}
   updateLocationStatus();
   renderAll();
 }
@@ -910,6 +925,20 @@ locationConsentDialog.addEventListener("cancel", (event) => {
 });
 updateLocationStatus();
 window.addEventListener("wowbrowser:ready", () => {
+  try {
+    if (window.__nativePrefs && typeof window.__nativePrefs === "object") {
+      const np = window.__nativePrefs;
+      if (typeof np.approximateLocation === "boolean")
+        preferences.approximateLocation = np.approximateLocation;
+      if (typeof np.countryCode === "string")
+        preferences.countryCode = np.countryCode;
+      if (typeof np.detectedRegion === "string")
+        preferences.detectedRegion = np.detectedRegion;
+      if (np.approximateLocation === true && preferences.region !== "auto")
+        preferences.region = "auto";
+      savePreferences();
+    }
+  } catch (e) {}
   if (typeof preferences.approximateLocation !== "boolean") {
     showLocationConsent();
   } else if (preferences.approximateLocation) {
