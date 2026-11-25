@@ -132,12 +132,15 @@
   // The native language bridge navigates to a custom URL that CEF cancels.
   // In some timing cases that prevents the load event from ever firing, so
   // guarantee the splash always finishes even if the page never reports ready.
+  // Animate to 100% first so the bar does not appear stuck at 88%.
   window.setTimeout(() => {
     if (!finished) {
       pageReady = true;
       progressAtReady = progress;
       readyAt = performance.now();
-      finishSplash();
+      window.setTimeout(() => {
+        if (!finished) finishSplash();
+      }, 800);
     }
   }, 4500);
 })();
