@@ -9,6 +9,21 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
+    <aside class="download-banner" id="download-banner" aria-label="Descargar WowBrowser para Windows" data-i18n-aria-label="bannerLabel" hidden>
+      <div class="download-banner-copy">
+        <span class="download-banner-mark" aria-hidden="true">W</span>
+        <div class="download-banner-text">
+          <strong data-i18n="bannerTitle">Lleva WowBrowser a tu escritorio</strong>
+          <span class="download-banner-description" data-i18n="bannerDescription">Descárgalo para Windows y abre tus servidores en un solo lugar.</span>
+        </div>
+      </div>
+      <div class="download-banner-actions">
+        <a class="primary-button banner-download" href="https://github.com/microbica/WowBrowser-Releases/releases/latest/download/WowBrowser-win-Setup.exe" target="_blank" rel="noopener noreferrer" data-open-external data-i18n="installer">Instalador .exe</a>
+        <a class="secondary-button banner-download" href="https://github.com/microbica/WowBrowser-Releases/releases/latest/download/WowBrowser-win-Portable.zip" target="_blank" rel="noopener noreferrer" data-open-external data-i18n="portable">Portátil .zip</a>
+      </div>
+      <button class="icon-button banner-close" type="button" id="dismiss-download-banner" aria-label="Cerrar aviso de descarga" data-i18n-aria-label="dismissBanner">×</button>
+    </aside>
+
     <div class="startup-splash" id="startup-splash" role="status" aria-live="polite">
       <div class="splash-map" aria-hidden="true"></div>
       <div class="splash-vignette" aria-hidden="true"></div>
@@ -223,6 +238,23 @@
         <button class="secondary-button" type="button" id="deny-location">Ahora no</button>
         <button class="primary-button" type="button" id="allow-location">Permitir país aproximado <span>→</span></button>
       </div>
+    </dialog>
+
+    <dialog class="modal update-dialog" id="update-dialog" aria-labelledby="update-title" aria-describedby="update-description">
+      <div class="modal-heading">
+        <div><span class="eyebrow" data-i18n="updateEyebrow">WOWBROWSER · ACTUALIZACIÓN</span><h2 id="update-title" data-i18n="updateTitle">Nueva versión disponible</h2></div>
+      </div>
+      <p class="form-hint" id="update-description" data-i18n="updateDescription">Hay una versión más reciente de WowBrowser disponible para Windows.</p>
+      <div class="update-version-grid">
+        <div><span data-i18n="installedVersion">Versión instalada</span><strong id="update-installed-version">—</strong></div>
+        <div><span data-i18n="availableVersion">Versión disponible</span><strong id="update-available-version">—</strong></div>
+      </div>
+      <a class="text-button update-release-link" href="https://github.com/microbica/WowBrowser-Releases/releases/latest" target="_blank" rel="noopener noreferrer" data-open-external><span data-i18n="releaseNotes">Ver notas de la versión</span> <span aria-hidden="true">↗</span></a>
+      <div class="update-download-actions">
+        <a class="primary-button button-link" href="https://github.com/microbica/WowBrowser-Releases/releases/latest/download/WowBrowser-win-Setup.exe" target="_blank" rel="noopener noreferrer" data-open-external data-i18n="downloadInstaller">Descargar instalador</a>
+        <a class="secondary-button button-link" href="https://github.com/microbica/WowBrowser-Releases/releases/latest/download/WowBrowser-win-Portable.zip" target="_blank" rel="noopener noreferrer" data-open-external data-i18n="downloadPortable">Descargar ZIP portátil</a>
+      </div>
+      <div class="modal-actions"><button class="secondary-button" type="button" id="dismiss-update" data-i18n="notNow">Ahora no</button></div>
     </dialog>
     <script src="splash.js"></script>
     <script src="app.js"></script>

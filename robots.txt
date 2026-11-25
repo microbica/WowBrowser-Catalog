@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /version.json
+Disallow: /update.html

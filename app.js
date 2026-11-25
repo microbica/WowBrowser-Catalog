@@ -4,6 +4,11 @@ const STORAGE_SERVERS = "wowbrowser.servers.v1";const STORAGE_FAVORITES = "wowbr
 const STORAGE_PREFERENCES = "wowbrowser.preferences.v1";
 const STORAGE_REMOTE_CATALOG = "wowbrowser.remoteCatalog.v1";
 const STORAGE_VISITS = "wowbrowser.visits.v1";
+const RELEASE_URL_LATEST = "https://github.com/microbica/WowBrowser-Releases/releases/latest";
+const WINDOWS_DOWNLOADS_LATEST = {
+  installer: RELEASE_URL_LATEST + "/download/WowBrowser-win-Setup.exe",
+  portable: RELEASE_URL_LATEST + "/download/WowBrowser-win-Portable.zip"
+};
 const CATALOG_URL_CANDIDATES = (function () {
   const custom = "https://wowbrowser.pixplix.com/catalog.json";
   const github = "https://microbica.github.io/WowBrowser-Catalog/catalog.json";
@@ -429,6 +434,106 @@ const uiTextByLanguage = {
   }
 };
 
+const downloadUiText = {
+  es: {
+    bannerLabel: "Descargar WowBrowser para Windows",
+    bannerTitle: "Lleva WowBrowser a tu escritorio",
+    bannerDescription: "Descárgalo para Windows y abre tus servidores en un solo lugar.",
+    installer: "Instalador .exe",
+    portable: "Portátil .zip",
+    dismissBanner: "Cerrar aviso de descarga",
+    updateEyebrow: "WOWBROWSER · ACTUALIZACIÓN",
+    updateTitle: "Nueva versión disponible",
+    updateDescription: "Hay una versión más reciente de WowBrowser disponible para Windows.",
+    installedVersion: "Versión instalada",
+    availableVersion: "Versión disponible",
+    releaseNotes: "Ver notas de la versión",
+    downloadInstaller: "Descargar instalador",
+    downloadPortable: "Descargar ZIP portátil",
+    notNow: "Ahora no"
+  },
+  en: {
+    bannerLabel: "Download WowBrowser for Windows",
+    bannerTitle: "Bring WowBrowser to your desktop",
+    bannerDescription: "Download it for Windows and open your servers in one place.",
+    installer: "Installer .exe",
+    portable: "Portable .zip",
+    dismissBanner: "Dismiss download notice",
+    updateEyebrow: "WOWBROWSER · UPDATE",
+    updateTitle: "New version available",
+    updateDescription: "A newer version of WowBrowser is available for Windows.",
+    installedVersion: "Installed version",
+    availableVersion: "Available version",
+    releaseNotes: "View release notes",
+    downloadInstaller: "Download installer",
+    downloadPortable: "Download portable ZIP",
+    notNow: "Not now"
+  },
+  pt: {
+    bannerLabel: "Baixar o WowBrowser para Windows",
+    bannerTitle: "Leve o WowBrowser para o seu desktop",
+    bannerDescription: "Baixe para Windows e abra seus servidores em um só lugar.",
+    installer: "Instalador .exe",
+    portable: "Portátil .zip",
+    dismissBanner: "Fechar aviso de download",
+    updateEyebrow: "WOWBROWSER · ATUALIZAÇÃO",
+    updateTitle: "Nova versão disponível",
+    updateDescription: "Há uma versão mais recente do WowBrowser disponível para Windows.",
+    installedVersion: "Versão instalada",
+    availableVersion: "Versão disponível",
+    releaseNotes: "Ver notas da versão",
+    downloadInstaller: "Baixar instalador",
+    downloadPortable: "Baixar ZIP portátil",
+    notNow: "Agora não"
+  },
+  fr: {
+    bannerLabel: "Télécharger WowBrowser pour Windows",
+    bannerTitle: "Emportez WowBrowser sur votre bureau",
+    bannerDescription: "Téléchargez-le pour Windows et ouvrez vos serveurs au même endroit.",
+    installer: "Installateur .exe",
+    portable: "Version portable .zip",
+    dismissBanner: "Fermer l’avis de téléchargement",
+    updateEyebrow: "WOWBROWSER · MISE À JOUR",
+    updateTitle: "Nouvelle version disponible",
+    updateDescription: "Une version plus récente de WowBrowser est disponible pour Windows.",
+    installedVersion: "Version installée",
+    availableVersion: "Version disponible",
+    releaseNotes: "Voir les notes de version",
+    downloadInstaller: "Télécharger l’installateur",
+    downloadPortable: "Télécharger le ZIP portable",
+    notNow: "Pas maintenant"
+  },
+  de: {
+    bannerLabel: "WowBrowser für Windows herunterladen",
+    bannerTitle: "Hol dir WowBrowser auf den Desktop",
+    bannerDescription: "Lade es für Windows herunter und öffne deine Server an einem Ort.",
+    installer: "Installer .exe",
+    portable: "Portable .zip",
+    dismissBanner: "Downloadhinweis schließen",
+    updateEyebrow: "WOWBROWSER · UPDATE",
+    updateTitle: "Neue Version verfügbar",
+    updateDescription: "Eine neuere Version von WowBrowser ist für Windows verfügbar.",
+    installedVersion: "Installierte Version",
+    availableVersion: "Verfügbare Version",
+    releaseNotes: "Versionshinweise ansehen",
+    downloadInstaller: "Installer herunterladen",
+    downloadPortable: "Portables ZIP herunterladen",
+    notNow: "Nicht jetzt"
+  }
+};
+
+function applyDownloadUiLanguage() {
+  const strings = downloadUiText[uiLanguage] || downloadUiText.es;
+  document.querySelectorAll("[data-i18n]").forEach((element) => {
+    const translated = strings[element.dataset.i18n];
+    if (translated) element.textContent = translated;
+  });
+  document.querySelectorAll("[data-i18n-aria-label]").forEach((element) => {
+    const translated = strings[element.dataset.i18nAriaLabel];
+    if (translated) element.setAttribute("aria-label", translated);
+  });
+}
+
 function readJson(key, fallback) {
   try {
     const value = JSON.parse(localStorage.getItem(key));
@@ -661,10 +766,12 @@ function applyUiLanguage(language) {
   pageNames = pageNamesByLanguage[uiLanguage];
   const text = uiTextByLanguage[uiLanguage] || {};
   document.documentElement.lang = uiLanguage;
-  try {
-    window.location.href = "wowbrowser://language/" + uiLanguage;
-  } catch (error) {
-    // El puente nativo no está disponible fuera de WowBrowser.
+  if (window.__wowbrowser?.native === true) {
+    try {
+      window.location.href = "wowbrowser://language/" + uiLanguage;
+    } catch (error) {
+      // El puente nativo no está disponible fuera de WowBrowser.
+    }
   }
 
   const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
@@ -719,6 +826,7 @@ function applyUiLanguage(language) {
   document.querySelector(".main-nav").setAttribute("aria-label", translateUiText("Navegación principal"));
   document.querySelector("#page-title").textContent = pageNames[activeView];
   updateLocationStatus();
+  applyDownloadUiLanguage();
   renderAll();
 }
 
@@ -926,11 +1034,140 @@ function showLocationConsent() {
     locationConsentDialog.showModal();
 }
 
+function parseSemanticVersion(value) {
+  if (typeof value !== "string") return null;
+  const match = /^v?(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?$/.exec(value.trim());
+  if (!match) return null;
+  const prerelease = match[4] ? match[4].split(".") : null;
+  if (prerelease && prerelease.some((identifier) => /^\d+$/.test(identifier) && identifier.length > 1 && identifier.startsWith("0")))
+    return null;
+  return {
+    core: [BigInt(match[1]), BigInt(match[2]), BigInt(match[3])],
+    prerelease
+  };
+}
+
+function compareSemanticVersions(left, right) {
+  const a = parseSemanticVersion(left);
+  const b = parseSemanticVersion(right);
+  if (!a || !b) return null;
+  for (let index = 0; index < a.core.length; index += 1) {
+    if (a.core[index] < b.core[index]) return -1;
+    if (a.core[index] > b.core[index]) return 1;
+  }
+  if (!a.prerelease && !b.prerelease) return 0;
+  if (!a.prerelease) return 1;
+  if (!b.prerelease) return -1;
+  const length = Math.max(a.prerelease.length, b.prerelease.length);
+  for (let index = 0; index < length; index += 1) {
+    const leftIdentifier = a.prerelease[index];
+    const rightIdentifier = b.prerelease[index];
+    if (leftIdentifier === undefined) return -1;
+    if (rightIdentifier === undefined) return 1;
+    if (leftIdentifier === rightIdentifier) continue;
+    const leftNumeric = /^\d+$/.test(leftIdentifier);
+    const rightNumeric = /^\d+$/.test(rightIdentifier);
+    if (leftNumeric && rightNumeric) {
+      const leftNumber = BigInt(leftIdentifier);
+      const rightNumber = BigInt(rightIdentifier);
+      if (leftNumber < rightNumber) return -1;
+      if (leftNumber > rightNumber) return 1;
+    } else if (leftNumeric !== rightNumeric) {
+      return leftNumeric ? -1 : 1;
+    } else {
+      return leftIdentifier < rightIdentifier ? -1 : 1;
+    }
+  }
+  return 0;
+}
+
+function safeDownloadUrl(rawUrl) {
+  try {
+    const url = new URL(rawUrl);
+    return url.protocol === "https:" ? url.href : null;
+  } catch {
+    return null;
+  }
+}
+
+function normalizeVersionManifest(payload) {
+  if (!payload || payload.schemaVersion !== 1 || !parseSemanticVersion(payload.version)) return null;
+  const windows = payload.downloads?.windows;
+  return {
+    version: payload.version.trim(),
+    releaseUrl: safeDownloadUrl(payload.releaseUrl) || RELEASE_URL_LATEST,
+    installer: safeDownloadUrl(windows?.installer) || WINDOWS_DOWNLOADS_LATEST.installer,
+    portable: safeDownloadUrl(windows?.portable) || WINDOWS_DOWNLOADS_LATEST.portable
+  };
+}
+
+const downloadBanner = document.querySelector("#download-banner");
+const updateDialog = document.querySelector("#update-dialog");
+let downloadBannerDismissed = false;
+let pendingUpdate = null;
+let nativeUpdateCheckStarted = false;
+let wowbrowserReady = false;
+
+function updateDownloadBanner() {
+  const visible = wowbrowserReady && window.__wowbrowser?.native !== true && !downloadBannerDismissed;
+  downloadBanner.hidden = !visible;
+  document.body.classList.toggle("has-download-banner", visible);
+}
+
+function presentPendingUpdate() {
+  if (!pendingUpdate || locationConsentDialog.open || updateDialog.open) return;
+  updateDialog.showModal();
+}
+
+async function checkForAppUpdate() {
+  if (window.__wowbrowser?.native !== true) return;
+  try {
+    const response = await fetch("version.json", { cache: "no-store", credentials: "omit" });
+    if (!response.ok) return;
+    const manifest = normalizeVersionManifest(await response.json());
+    if (!manifest) return;
+    const installedVersion = window.__wowbrowser?.version;
+    if (compareSemanticVersions(manifest.version, installedVersion) !== 1) return;
+    document.querySelector("#update-installed-version").textContent = String(installedVersion).trim();
+    document.querySelector("#update-available-version").textContent = manifest.version;
+    document.querySelector("#update-release-link").href = manifest.releaseUrl;
+    document.querySelector("#update-installer-link").href = manifest.installer;
+    document.querySelector("#update-portable-link").href = manifest.portable;
+    pendingUpdate = manifest;
+    presentPendingUpdate();
+  } catch {
+    // La comprobación de versión es opcional y nunca debe interrumpir el catálogo.
+  }
+}
+
+function refreshNativeFeatures() {
+  if (!wowbrowserReady) return;
+  updateDownloadBanner();
+  if (window.__wowbrowser?.native === true && !nativeUpdateCheckStarted) {
+    nativeUpdateCheckStarted = true;
+    void checkForAppUpdate();
+  }
+}
+
 function openAddDialog() {
   document.querySelector("#add-server-dialog").showModal();
 }
 
 document.addEventListener("click", (event) => {
+  const externalLink = event.target.closest("[data-open-external]");
+  if (externalLink) {
+    const url = safeHttpUrl(externalLink.href);
+    if (!url) {
+      event.preventDefault();
+      return;
+    }
+    if (window.__wowbrowser?.native === true) {
+      event.preventDefault();
+      window.location.href = "wowbrowser://open-external?url=" + encodeURIComponent(url);
+    }
+    return;
+  }
+
   const viewButton = event.target.closest("[data-view]");
   if (viewButton) {
     event.preventDefault();
@@ -1004,8 +1241,20 @@ locationConsentDialog.addEventListener("cancel", (event) => {
   event.preventDefault();
   resolveLocationConsent(false);
 });
+locationConsentDialog.addEventListener("close", presentPendingUpdate);
+updateDialog.addEventListener("close", () => {
+  pendingUpdate = null;
+});
+document.querySelector("#dismiss-download-banner").addEventListener("click", () => {
+  downloadBannerDismissed = true;
+  updateDownloadBanner();
+});
+document.querySelector("#dismiss-update").addEventListener("click", () => updateDialog.close());
+window.addEventListener("wowbrowser:native", refreshNativeFeatures);
 updateLocationStatus();
 window.addEventListener("wowbrowser:ready", () => {
+  wowbrowserReady = true;
+  refreshNativeFeatures();
   try {
     if (window.__nativePrefs && typeof window.__nativePrefs === "object") {
       const np = window.__nativePrefs;

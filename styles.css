@@ -195,6 +195,46 @@ select option { background: #202126; color: var(--text); }
 .secondary-button { min-height: 36px; padding: 0 12px; border: 1px solid #36373d; background: #202126; color: #c5c4c1; font-size: 10px; }
 .modal-actions .primary-button { min-height: 36px; font-size: 10px; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+body.has-download-banner { padding-bottom: 86px; }
+.download-banner { position: fixed; z-index: 30; right: 18px; bottom: 16px; left: 246px; display: flex; max-width: 900px; min-height: 62px; align-items: center; gap: 14px; padding: 10px 12px 10px 14px; margin: 0 auto; border: 1px solid #454036; border-radius: 10px; background: #1a1b20f7; box-shadow: 0 12px 40px #0009; backdrop-filter: blur(8px); }
+.download-banner[hidden] { display: none; }
+.download-banner-copy { display: flex; min-width: 0; flex: 1 1 auto; align-items: center; gap: 11px; }
+.download-banner-mark { display: flex; width: 34px; height: 34px; flex: 0 0 auto; align-items: center; justify-content: center; border: 1px solid #e7a94e55; border-radius: 9px; background: #e7a94e12; color: var(--accent-strong); font-size: 15px; font-weight: 800; }
+.download-banner-text { min-width: 0; }
+.download-banner-text strong, .download-banner-description { display: block; }
+.download-banner-text strong { color: #e8e5df; font-size: 11px; font-weight: 600; line-height: 1.4; }
+.download-banner-description { margin-top: 3px; color: #92929a; font-size: 9px; line-height: 1.45; }
+.download-banner-actions { display: flex; flex: 0 0 auto; gap: 7px; }
+.banner-download { min-height: 32px; padding: 0 10px; font-size: 9px; text-decoration: none; white-space: nowrap; }
+.banner-close { width: 28px; height: 28px; flex: 0 0 auto; }
+.button-link { text-decoration: none; }
+.button-link:focus-visible, .banner-close:focus-visible { outline: 2px solid var(--accent-strong); outline-offset: 3px; }
+.update-version-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 16px 0; }
+.update-version-grid > div { padding: 12px; border: 1px solid #34353b; border-radius: 8px; background: #141519; }
+.update-version-grid span { display: block; color: #92929a; font-size: 9px; }
+.update-version-grid strong { display: block; margin-top: 6px; color: var(--accent-strong); font-size: 18px; font-variant-numeric: tabular-nums; }
+.update-release-link { display: inline-flex; align-items: center; gap: 6px; margin: 2px 0 16px; }
+.update-download-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.update-download-actions > * { min-height: 38px; flex: 1 1 170px; }
+.update-page { display: grid; min-width: 320px; min-height: 100vh; place-items: center; padding: 32px 20px; background: radial-gradient(circle at 50% 0%, #2c2419 0%, #111216 48%, #090a0d 100%); }
+.update-page-card { width: min(500px, 100%); padding: 38px; border: 1px solid #343239; border-radius: 14px; background: #191a1ff2; box-shadow: 0 24px 80px #0009; text-align: center; }
+.update-page-mark { display: block; width: 58px; height: 58px; margin: 0 auto 20px; }
+.update-page-card h1 { margin: 10px 0 12px; font-size: 26px; letter-spacing: -.7px; }
+.update-page-card > p { color: var(--muted); font-size: 12px; line-height: 1.65; }
+.update-page-version { padding: 15px; margin: 22px 0; border: 1px solid #3c372e; border-radius: 9px; background: #121316; }
+.update-page-version span { display: block; color: #92929a; font-size: 10px; }
+.update-page-version strong { display: block; margin-top: 7px; color: var(--accent-strong); font-size: 24px; font-variant-numeric: tabular-nums; }
+.update-page-actions { display: grid; gap: 10px; }
+.update-page-actions .button-link { min-height: 42px; }
+.update-page-note { margin: 20px 0 0; color: #74757d !important; font-size: 9px !important; }
+@media (max-width: 1000px) {
+  .download-banner-description { display: none; }
+}
+@media (max-width: 800px) {
+  .download-banner { right: 12px; bottom: 12px; left: 202px; gap: 8px; padding: 9px; }
+  .download-banner-mark { display: none; }
+  .download-banner-actions { gap: 5px; }
+}
 @media (max-width: 1000px) {
   .main-content { padding: 0 28px; }
   .hero { padding: 30px; }
