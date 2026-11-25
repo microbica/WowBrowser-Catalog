@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="dark">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src https://ipapi.co https:; object-src 'none'; base-uri 'none'; form-action 'self'">    <title>WowBrowser</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https:; font-src 'self'; connect-src https://ipapi.co https:; object-src 'none'; base-uri 'none'; form-action 'self'">    <title>WowBrowser</title>
     <link rel="icon" type="image/svg+xml" href="assets/wowbrowser-mark.svg">
     <link rel="stylesheet" href="styles.css">
   </head>
@@ -157,14 +157,14 @@
             </label>
           </div>
           <div class="server-grid" id="catalog-server-grid"></div>
-          <div class="empty-state hidden" id="empty-state"><div>⌕</div><h3>No encontramos servidores</h3><p>Prueba con otro término o añade un servidor.</p></div>
+          <div class="empty-state hidden" id="empty-state"><img class="empty-illustration" src="assets/empty-worlds.svg" alt="" aria-hidden="true"><h3>No encontramos servidores</h3><p>Prueba con otro término o añade un servidor.</p></div>
           <div class="catalog-footnote">Los votos diarios y “Más jugados” se activarán al conectar el catálogo a un servicio central. Este prototipo no registra ni simula votos.</div>
         </section>
 
         <section class="view" id="view-favorites">
           <div class="page-intro"><span class="eyebrow">TUS MUNDOS GUARDADOS</span><h1>Favoritos</h1><p>Acceso rápido a los servidores que quieres tener a mano.</p></div>
           <div class="server-grid" id="favorites-server-grid"></div>
-          <div class="empty-state hidden" id="favorites-empty"><div>♡</div><h3>Aún no tienes favoritos</h3><p>Guarda un servidor con el icono del corazón.</p></div>
+          <div class="empty-state hidden" id="favorites-empty"><img class="empty-illustration" src="assets/empty-worlds.svg" alt="" aria-hidden="true"><h3>Aún no tienes favoritos</h3><p>Guarda un servidor con el icono del corazón.</p></div>
         </section>
 
         <section class="view" id="view-settings">

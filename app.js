@@ -3,6 +3,7 @@
 const STORAGE_SERVERS = "wowbrowser.servers.v1";const STORAGE_FAVORITES = "wowbrowser.favorites.v1";
 const STORAGE_PREFERENCES = "wowbrowser.preferences.v1";
 const STORAGE_REMOTE_CATALOG = "wowbrowser.remoteCatalog.v1";
+const STORAGE_VISITS = "wowbrowser.visits.v1";
 const CATALOG_URL_CANDIDATES = (function () {
   const custom = "https://wowbrowser.pixplix.com/catalog.json";
   const github = "https://microbica.github.io/WowBrowser-Catalog/catalog.json";
@@ -182,7 +183,7 @@ const englishUiText = {
   "Para recomendar servidores de tu región, WowBrowser consultará": "To recommend servers in your region, WowBrowser will query",
   "al iniciar. Ese servicio recibe tu IP pública y devuelve solo un código de país. No solicitamos GPS ni coordenadas precisas, y no guardamos tu IP. La decisión se recuerda y puedes cambiarla en Preferencias.": "at startup. That service receives your public IP and returns only a country code. We do not request GPS or precise coordinates, and we do not store your IP. Your choice is remembered and can be changed in Preferences.",
   "Ahora no": "Not now", "Permitir país aproximado": "Allow approximate country",
-    "No verificado": "Unverified", "Abrir cliente": "Open client",
+    "Abrir cliente": "Open client",
     "Añadir a favoritos": "Add to favorites", "Quitar de favoritos": "Remove from favorites",
     "Filtrar por idioma": "Filter by language", "Filtrar por versión del juego": "Filter by game version",
     "Filtrar por región": "Filter by region", "Ordenar servidores": "Sort servers",
@@ -261,7 +262,7 @@ const uiTextByLanguage = {
     "Para recomendar servidores de tu región, WowBrowser consultará": "Para recomendar servidores da sua região, o WowBrowser consultará",
     "al iniciar. Ese servicio recibe tu IP pública y devuelve solo un código de país. No solicitamos GPS ni coordenadas precisas, y no guardamos tu IP. La decisión se recuerda y puedes cambiarla en Preferencias.": "ao iniciar. Esse serviço recebe seu IP público e retorna apenas o código do país. Não solicitamos GPS nem coordenadas precisas e não salvamos seu IP. Sua escolha fica salva e pode ser alterada em Preferências.",
     "Ahora no": "Agora não", "Permitir país aproximado": "Permitir país aproximado",
-    "No verificado": "Não verificado", "Abrir cliente": "Abrir cliente",
+    "Abrir cliente": "Abrir cliente",
     "Añadir a favoritos": "Adicionar aos favoritos", "Quitar de favoritos": "Remover dos favoritos",
     "Filtrar por idioma": "Filtrar por idioma", "Filtrar por versión del juego": "Filtrar por versão do jogo",
     "Filtrar por región": "Filtrar por região", "Ordenar servidores": "Ordenar servidores",
@@ -335,7 +336,7 @@ const uiTextByLanguage = {
     "Para recomendar servidores de tu región, WowBrowser consultará": "Pour recommander des serveurs de votre région, WowBrowser consultera",
     "al iniciar. Ese servicio recibe tu IP pública y devuelve solo un código de país. No solicitamos GPS ni coordenadas precisas, y no guardamos tu IP. La decisión se recuerda y puedes cambiarla en Preferencias.": "au démarrage. Ce service reçoit votre IP publique et renvoie uniquement un code pays. Nous ne demandons ni GPS ni coordonnées précises et ne conservons pas votre IP. Votre choix est mémorisé et modifiable dans Préférences.",
     "Ahora no": "Pas maintenant", "Permitir país aproximado": "Autoriser le pays approximatif",
-    "No verificado": "Non vérifié", "Abrir cliente": "Ouvrir le client",
+    "Abrir cliente": "Ouvrir le client",
     "Añadir a favoritos": "Ajouter aux favoris", "Quitar de favoritos": "Retirer des favoris",
     "Filtrar por idioma": "Filtrer par langue", "Filtrar por versión del juego": "Filtrer par version du jeu",
     "Filtrar por región": "Filtrer par région", "Ordenar servidores": "Trier les serveurs",
@@ -409,7 +410,7 @@ const uiTextByLanguage = {
     "Para recomendar servidores de tu región, WowBrowser consultará": "Um Server aus deiner Region zu empfehlen, fragt WowBrowser",
     "al iniciar. Ese servicio recibe tu IP pública y devuelve solo un código de país. No solicitamos GPS ni coordenadas precisas, y no guardamos tu IP. La decisión se recuerda y puedes cambiarla en Preferencias.": "beim Start ab. Dieser Dienst erhält deine öffentliche IP und gibt nur den Ländercode zurück. Wir fragen weder GPS noch genaue Koordinaten ab und speichern deine IP nicht. Deine Wahl wird gespeichert und kann in Einstellungen geändert werden.",
     "Ahora no": "Nicht jetzt", "Permitir país aproximado": "Ungefähres Land erlauben",
-    "No verificado": "Nicht verifiziert", "Abrir cliente": "Client öffnen",
+    "Abrir cliente": "Client öffnen",
     "Añadir a favoritos": "Zu Favoriten hinzufügen", "Quitar de favoritos": "Aus Favoriten entfernen",
     "Filtrar por idioma": "Nach Sprache filtern", "Filtrar por versión del juego": "Nach Spielversion filtern",
     "Filtrar por región": "Nach Region filtern", "Ordenar servidores": "Server sortieren",
@@ -451,6 +452,11 @@ const savedServers = readJson(STORAGE_SERVERS, []);
 let userServers = Array.isArray(savedServers) ? savedServers.map(normalizeServer) : [];
 const cachedRemoteCatalog = readJson(STORAGE_REMOTE_CATALOG, []);
 let remoteServers = Array.isArray(cachedRemoteCatalog) ? cachedRemoteCatalog.map(normalizeServer) : [];let favorites = new Set(readJson(STORAGE_FAVORITES, []));
+const savedVisits = readJson(STORAGE_VISITS, {});
+let visitCounts = savedVisits && typeof savedVisits === "object" && !Array.isArray(savedVisits) ? { ...savedVisits } : {};
+for (const [id, count] of Object.entries(visitCounts)) {
+  if (!Number.isFinite(count) || count < 0) delete visitCounts[id];
+}
 const storedPreferencesValue = readJson(STORAGE_PREFERENCES, {});
 const storedPreferences = storedPreferencesValue && typeof storedPreferencesValue === "object" &&
   !Array.isArray(storedPreferencesValue) ? storedPreferencesValue : {};
@@ -525,6 +531,17 @@ function safeHttpUrl(rawUrl) {
   }
 }
 
+function serverFaviconUrl(server) {
+  if (server && server.favicon) return server.favicon;
+  const url = safeHttpUrl(server && server.playUrl);
+  if (!url) return null;
+  try {
+    return new URL(url).origin + "/favicon.ico";
+  } catch (error) {
+    return null;
+  }
+}
+
 function serverCard(server) {
   const url = safeHttpUrl(server.playUrl);
   if (!url) return "";
@@ -535,10 +552,23 @@ function serverCard(server) {
   const text = uiTextByLanguage[uiLanguage] || {};
   const description = text[server.description] || server.description ||
     text["Servidor añadido por ti."] || "Servidor añadido por ti.";
+  const faviconUrl = serverFaviconUrl(server);
+  const initial = escapeHtml((server.name || "?").trim().charAt(0).toUpperCase() || "✧");
+  const visits = Number.isFinite(visitCounts[server.id]) ? visitCounts[server.id] : 0;
+  let host = "";
+  try {
+    host = new URL(url).hostname.replace(/^www\./, "");
+  } catch (error) {}
+  const crest = faviconUrl
+    ? `<img class="server-favicon" src="${escapeHtml(faviconUrl)}" alt="" loading="lazy" decoding="async" width="32" height="32">`
+    : `<span class="server-favicon-fallback" aria-hidden="true">${initial}</span>`;
   const card = document.createElement("article");
   card.className = "server-card";
   card.innerHTML = `
     <div class="server-card-art">
+      <span class="art-landscape" aria-hidden="true"></span>
+      <span class="server-crest" aria-hidden="true">${crest}</span>
+      ${host ? `<span class="server-domain">${escapeHtml(host)}</span>` : ""}
       <span class="server-symbol" aria-hidden="true">${escapeHtml(server.symbol || "✧")}</span>
       <span class="server-type">${escapeHtml(version)}</span>
     </div>
@@ -549,8 +579,29 @@ function serverCard(server) {
       </div>
       <p class="server-description">${escapeHtml(description)}</p>
       <div class="server-meta"><span class="meta-chip">${escapeHtml(lang)}</span><span class="meta-chip region">${escapeHtml(region)}</span><span class="meta-chip version">${escapeHtml(version)}</span></div>
-      <div class="server-actions"><a class="play-link" href="${escapeHtml(url)}" data-launch="${escapeHtml(server.id)}">${escapeHtml(translateUiText("Abrir cliente"))} <span>→</span></a><span class="server-status">${escapeHtml(translateUiText("No verificado"))}</span></div>
+      <div class="server-actions"><a class="play-link" href="${escapeHtml(url)}" data-launch="${escapeHtml(server.id)}">${escapeHtml(translateUiText("Abrir cliente"))} <span>→</span></a><span class="server-visits ${visits > 0 ? "has-visits" : ""}" data-visits-for="${escapeHtml(server.id)}" title="${escapeHtml((visitWords[uiLanguage] || visitWords.es)[2])}"><span class="visits-dot" aria-hidden="true"></span><span class="visits-number">${visits}</span> <span class="visits-word">${escapeHtml(visitWord(visits))}</span></span></div>
     </div>`;
+
+  const faviconImg = card.querySelector(".server-favicon");
+  if (faviconImg) {
+    let triedGoogle = false;
+    faviconImg.addEventListener("error", () => {
+      if (!triedGoogle) {
+        triedGoogle = true;
+        try {
+          const host = new URL(url).hostname;
+          faviconImg.src = "https://www.google.com/s2/favicons?domain=" + encodeURIComponent(host) + "&sz=64";
+          return;
+        } catch (error) {}
+      }
+      const fallback = document.createElement("span");
+      fallback.className = "server-favicon-fallback";
+      fallback.setAttribute("aria-hidden", "true");
+      fallback.textContent = (server.name || "?").trim().charAt(0).toUpperCase() || "✧";
+      faviconImg.replaceWith(fallback);
+    });
+  }
+
   return card;
 }
 
@@ -563,6 +614,35 @@ function escapeHtml(value) {
 const originalUiTextNodes = new WeakMap();
 function translateUiText(text) {
   return uiTextByLanguage[uiLanguage]?.[text] || text;
+}
+
+const visitWords = {
+  es: ["entrada", "entradas", "Entradas registradas en este dispositivo"],
+  en: ["visit", "visits", "Visits recorded on this device"],
+  pt: ["entrada", "entradas", "Entradas registradas neste dispositivo"],
+  fr: ["entrée", "entrées", "Entrées enregistrées sur cet appareil"],
+  de: ["Aufruf", "Aufrufe", "Aufrufe auf diesem Gerät"]
+};
+function visitWord(count) {
+  const words = visitWords[uiLanguage] || visitWords.es;
+  return words[count === 1 ? 0 : 1];
+}
+function updateVisitDisplays(id) {
+  const count = Number.isFinite(visitCounts[id]) ? visitCounts[id] : 0;
+  document.querySelectorAll(".server-visits").forEach((element) => {
+    if (element.dataset.visitsFor !== id) return;
+    element.querySelector(".visits-number").textContent = String(count);
+    element.querySelector(".visits-word").textContent = visitWord(count);
+    element.classList.toggle("has-visits", count > 0);
+  });
+}
+function registerVisit(id) {
+  if (!id) return;
+  visitCounts[id] = (Number.isFinite(visitCounts[id]) ? visitCounts[id] : 0) + 1;
+  try {
+    localStorage.setItem(STORAGE_VISITS, JSON.stringify(visitCounts));
+  } catch (error) {}
+  updateVisitDisplays(id);
 }
 
 function replaceOptions(selector, entries, selectedValue) {
@@ -871,6 +951,7 @@ document.addEventListener("click", (event) => {
       event.preventDefault();
       return;
     }
+    registerVisit(launchLink.dataset.launch);
     // The native browser chrome keeps Home and Back available while the game runs.
   }
 });
