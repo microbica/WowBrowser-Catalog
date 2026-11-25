@@ -3,9 +3,14 @@
 const STORAGE_SERVERS = "wowbrowser.servers.v1";const STORAGE_FAVORITES = "wowbrowser.favorites.v1";
 const STORAGE_PREFERENCES = "wowbrowser.preferences.v1";
 const STORAGE_REMOTE_CATALOG = "wowbrowser.remoteCatalog.v1";
-const CATALOG_URL = (function () {
-  try { return localStorage.getItem("wowbrowser.catalogUrl") || "https://microbica.github.io/WowBrowser-Catalog/catalog.json"; }
-  catch (e) { return "https://microbica.github.io/WowBrowser-Catalog/catalog.json"; }
+const CATALOG_URL_CANDIDATES = (function () {
+  const custom = "https://wowbrowser.pixplix.com/catalog.json";
+  const github = "https://microbica.github.io/WowBrowser-Catalog/catalog.json";
+  try {
+    const override = localStorage.getItem("wowbrowser.catalogUrl");
+    if (override) return [override];
+  } catch (e) {}
+  return [custom, github];
 })();
 const seedServers = [
   {
@@ -498,16 +503,18 @@ function applyRemoteCatalog(list) {
 }
 
 async function loadRemoteCatalog() {
-  try {
-    const response = await fetch(CATALOG_URL + (CATALOG_URL.indexOf("?") >= 0 ? "&" : "?") + "t=" + Date.now(), { cache: "no-store" });
-    if (!response.ok) throw new Error("HTTP " + response.status);
-    const data = await response.json();
-    applyRemoteCatalog(data);
-    return true;
-  } catch (error) {
-    try { console.warn("WowBrowser: no se pudo actualizar el catalogo remoto:", error); } catch (e) {}
-    return false;
+  for (const baseUrl of CATALOG_URL_CANDIDATES) {
+    try {
+      const response = await fetch(baseUrl + (baseUrl.indexOf("?") >= 0 ? "&" : "?") + "t=" + Date.now(), { cache: "no-store" });
+      if (!response.ok) throw new Error("HTTP " + response.status);
+      const data = await response.json();
+      applyRemoteCatalog(data);
+      return true;
+    } catch (error) {
+      try { console.warn("WowBrowser: no se pudo actualizar el catalogo remoto (" + baseUrl + "):", error); } catch (e) {}
+    }
   }
+  return false;
 }
 function safeHttpUrl(rawUrl) {
   try {
