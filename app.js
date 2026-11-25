@@ -170,7 +170,7 @@ const englishUiText = {
   "Cualquier versión": "Any version",
   "Usar país aproximado": "Use approximate country",
   "Solo país/continente por IP; no GPS ni coordenadas precisas.": "Country/continent from IP only; no GPS or precise coordinates.",
-  "Si lo permites, ipapi.co recibe tu IP pública para devolver únicamente el código de país. WowBrowser no guarda tu IP y puedes desactivarlo aquí.": "If enabled, ipapi.co receives your public IP to return only a country code. WowBrowser does not store your IP; disable it here anytime.",
+  "Si lo permites, api.country.is recibe tu IP pública para devolver únicamente el código de país. WowBrowser no guarda tu IP y puedes desactivarlo aquí.": "If enabled, api.country.is receives your public IP to return only a country code. WowBrowser does not store your IP; disable it here anytime.",
   "Hecho para explorar con calma.": "Made for exploring at your own pace.",
   "Desarrollado por": "Developed by",
   "AÑADIR A TU LISTA": "ADD TO YOUR LIST",
@@ -197,7 +197,7 @@ const englishUiText = {
   "Región detectada:": "Detected region:",
   "País detectado; elige la región manualmente": "Country detected; choose a region manually",
   "Detectando región desde la IP…": "Detecting region from IP…",
-  "Si aceptas, en cada inicio consultaremos ipapi.co para obtener solo tu país aproximado. El servicio recibe tu IP pública. WowBrowser no la guarda ni solicita GPS o coordenadas precisas. Guardaremos el permiso. Si eliges «Ahora no», volveremos a preguntarte al próximo inicio. Puedes desactivarlo en Preferencias.": "If you allow it, we’ll query ipapi.co at each startup to get only your approximate country. The service receives your public IP. WowBrowser does not store it or request GPS or precise coordinates. We’ll remember your permission. If you choose “Not now,” we’ll ask again the next time you open WowBrowser. You can turn it off in Preferences.",
+  "Si aceptas, en cada inicio consultaremos api.country.is para obtener solo tu país aproximado. El servicio recibe tu IP pública. WowBrowser no la guarda ni solicita GPS o coordenadas precisas. Guardaremos el permiso. Si eliges «Ahora no», volveremos a preguntarte al próximo inicio. Puedes desactivarlo en Preferencias.": "If you allow it, we’ll query api.country.is at each startup to get only your approximate country. The service receives your public IP. WowBrowser does not store it or request GPS or precise coordinates. We’ll remember your permission. If you choose “Not now,” we’ll ask again the next time you open WowBrowser. You can turn it off in Preferences.",
   "Buscar servidores": "Search servers",
   "Cerrar": "Close"
 };
@@ -250,7 +250,7 @@ const uiTextByLanguage = {
     "Prioriza la expansión que quieres jugar.": "Prioriza a expansão que você quer jogar.",
     "Usar país aproximado": "Usar país aproximado",
     "Solo país/continente por IP; no GPS ni coordenadas precisas.": "Somente país/continente por IP; sem GPS ou coordenadas precisas.",
-    "Si lo permites, ipapi.co recibe tu IP pública para devolver únicamente el código de país. WowBrowser no guarda tu IP y puedes desactivarlo aquí.": "Se permitido, ipapi.co recebe seu IP público e retorna apenas o código do país. WowBrowser não salva seu IP; você pode desativar aqui.",
+    "Si lo permites, api.country.is recibe tu IP pública para devolver únicamente el código de país. WowBrowser no guarda tu IP y puedes desactivarlo aquí.": "Se permitido, api.country.is recebe seu IP público e retorna apenas o código do país. WowBrowser não salva seu IP; você pode desativar aqui.",
     "Hecho para explorar con calma.": "Feito para explorar sem pressa.", "Desarrollado por": "Desenvolvido por",
     "AÑADIR A TU LISTA": "ADICIONAR À SUA LISTA", "Nuevo servidor": "Novo servidor",
     "Nombre": "Nome", "Nombre del servidor": "Nome do servidor", "URL del cliente web": "URL do cliente web",
@@ -276,7 +276,7 @@ const uiTextByLanguage = {
     "País aproximado activo": "País aproximado ativado", "Región detectada:": "Região detectada:",
     "País detectado; elige la región manualmente": "País detectado; escolha a região manualmente",
     "Detectando región desde la IP…": "Detectando região pelo IP…", "Buscar servidores": "Buscar servidores", "Cerrar": "Fechar",
-    "Si aceptas, en cada inicio consultaremos ipapi.co para obtener solo tu país aproximado. El servicio recibe tu IP pública. WowBrowser no la guarda ni solicita GPS o coordenadas precisas. Guardaremos el permiso. Si eliges «Ahora no», volveremos a preguntarte al próximo inicio. Puedes desactivarlo en Preferencias.": "Se você permitir, consultaremos ipapi.co a cada inicialização para obter apenas seu país aproximado. O serviço recebe seu IP público. O WowBrowser não o armazena nem solicita GPS ou coordenadas precisas. Sua permissão será lembrada. Se escolher “Agora não”, perguntaremos novamente na próxima vez que abrir o WowBrowser. Você pode desativar essa opção em Preferências."
+    "Si aceptas, en cada inicio consultaremos api.country.is para obtener solo tu país aproximado. El servicio recibe tu IP pública. WowBrowser no la guarda ni solicita GPS o coordenadas precisas. Guardaremos el permiso. Si eliges «Ahora no», volveremos a preguntarte al próximo inicio. Puedes desactivarlo en Preferencias.": "Se você permitir, consultaremos api.country.is a cada inicialização para obter apenas seu país aproximado. O serviço recebe seu IP público. O WowBrowser não o armazena nem solicita GPS ou coordenadas precisas. Sua permissão será lembrada. Se escolher “Agora não”, perguntaremos novamente na próxima vez que abrir o WowBrowser. Você pode desativar essa opção em Preferências."
   },
   fr: {
     "WOWBROWSER · VISTA PREVIA": "WOWBROWSER · APERÇU",
@@ -324,7 +324,7 @@ const uiTextByLanguage = {
     "Prioriza la expansión que quieres jugar.": "Privilégie l’extension à laquelle vous souhaitez jouer.",
     "Usar país aproximado": "Utiliser le pays approximatif",
     "Solo país/continente por IP; no GPS ni coordenadas precisas.": "Pays/continent estimé par IP uniquement ; pas de GPS ni de coordonnées précises.",
-    "Si lo permites, ipapi.co recibe tu IP pública para devolver únicamente el código de país. WowBrowser no guarda tu IP y puedes desactivarlo aquí.": "Si vous l’autorisez, ipapi.co reçoit votre IP publique et renvoie uniquement le code pays. WowBrowser ne conserve pas votre IP ; vous pouvez désactiver cette option ici.",
+    "Si lo permites, api.country.is recibe tu IP pública para devolver únicamente el código de país. WowBrowser no guarda tu IP y puedes desactivarlo aquí.": "Si vous l’autorisez, api.country.is reçoit votre IP publique et renvoie uniquement le code pays. WowBrowser ne conserve pas votre IP ; vous pouvez désactiver cette option ici.",
     "Hecho para explorar con calma.": "Conçu pour explorer à votre rythme.", "Desarrollado por": "Développé par",
     "AÑADIR A TU LISTA": "AJOUTER À VOTRE LISTE", "Nuevo servidor": "Nouveau serveur",
     "Nombre": "Nom", "Nombre del servidor": "Nom du serveur", "URL del cliente web": "URL du client web",
@@ -350,7 +350,7 @@ const uiTextByLanguage = {
     "País aproximado activo": "Pays approximatif activé", "Región detectada:": "Région détectée :",
     "País detectado; elige la región manualmente": "Pays détecté ; choisissez la région manuellement",
     "Detectando región desde la IP…": "Détection de la région par IP…", "Buscar servidores": "Rechercher des serveurs", "Cerrar": "Fermer",
-    "Si aceptas, en cada inicio consultaremos ipapi.co para obtener solo tu país aproximado. El servicio recibe tu IP pública. WowBrowser no la guarda ni solicita GPS o coordenadas precisas. Guardaremos el permiso. Si eliges «Ahora no», volveremos a preguntarte al próximo inicio. Puedes desactivarlo en Preferencias.": "Si vous l’autorisez, nous consulterons ipapi.co à chaque démarrage pour obtenir uniquement votre pays approximatif. Le service reçoit votre IP publique. WowBrowser ne la stocke pas et ne demande ni GPS ni coordonnées précises. Votre autorisation sera mémorisée. Si vous choisissez « Pas maintenant », nous vous le redemanderons au prochain lancement. Vous pouvez désactiver cette option dans Préférences."
+    "Si aceptas, en cada inicio consultaremos api.country.is para obtener solo tu país aproximado. El servicio recibe tu IP pública. WowBrowser no la guarda ni solicita GPS o coordenadas precisas. Guardaremos el permiso. Si eliges «Ahora no», volveremos a preguntarte al próximo inicio. Puedes desactivarlo en Preferencias.": "Si vous l’autorisez, nous consulterons api.country.is à chaque démarrage pour obtenir uniquement votre pays approximatif. Le service reçoit votre IP publique. WowBrowser ne la stocke pas et ne demande ni GPS ni coordonnées précises. Votre autorisation sera mémorisée. Si vous choisissez « Pas maintenant », nous vous le redemanderons au prochain lancement. Vous pouvez désactiver cette option dans Préférences."
   },
   de: {
     "WOWBROWSER · VISTA PREVIA": "WOWBROWSER · VORSCHAU",
@@ -398,7 +398,7 @@ const uiTextByLanguage = {
     "Prioriza la expansión que quieres jugar.": "Bevorzugt die Erweiterung, die du spielen möchtest.",
     "Usar país aproximado": "Ungefähres Land verwenden",
     "Solo país/continente por IP; no GPS ni coordenadas precisas.": "Nur Land/Kontinent anhand der IP; kein GPS oder genaue Koordinaten.",
-    "Si lo permites, ipapi.co recibe tu IP pública para devolver únicamente el código de país. WowBrowser no guarda tu IP y puedes desactivarlo aquí.": "Wenn erlaubt, erhält ipapi.co deine öffentliche IP und gibt nur den Ländercode zurück. WowBrowser speichert deine IP nicht; du kannst dies hier deaktivieren.",
+    "Si lo permites, api.country.is recibe tu IP pública para devolver únicamente el código de país. WowBrowser no guarda tu IP y puedes desactivarlo aquí.": "Wenn erlaubt, erhält api.country.is deine öffentliche IP und gibt nur den Ländercode zurück. WowBrowser speichert deine IP nicht; du kannst dies hier deaktivieren.",
     "Hecho para explorar con calma.": "Zum entspannten Entdecken gemacht.", "Desarrollado por": "Entwickelt von",
     "AÑADIR A TU LISTA": "ZU DEINER LISTE HINZUFÜGEN", "Nuevo servidor": "Neuer Server",
     "Nombre": "Name", "Nombre del servidor": "Servername", "URL del cliente web": "Webclient-URL",
@@ -424,7 +424,7 @@ const uiTextByLanguage = {
     "País aproximado activo": "Ungefähres Land aktiviert", "Región detectada:": "Erkannte Region:",
     "País detectado; elige la región manualmente": "Land erkannt; Region manuell auswählen",
     "Detectando región desde la IP…": "Region anhand der IP wird ermittelt…", "Buscar servidores": "Server suchen", "Cerrar": "Schließen",
-    "Si aceptas, en cada inicio consultaremos ipapi.co para obtener solo tu país aproximado. El servicio recibe tu IP pública. WowBrowser no la guarda ni solicita GPS o coordenadas precisas. Guardaremos el permiso. Si eliges «Ahora no», volveremos a preguntarte al próximo inicio. Puedes desactivarlo en Preferencias.": "Wenn du zustimmst, fragen wir ipapi.co bei jedem Start nach deinem ungefähren Land. Der Dienst erhält deine öffentliche IP. WowBrowser speichert sie nicht und fragt weder GPS noch genaue Koordinaten ab. Deine Zustimmung wird gespeichert. Wenn du „Nicht jetzt“ wählst, fragen wir beim nächsten Start erneut. Du kannst die Funktion in den Einstellungen deaktivieren."
+    "Si aceptas, en cada inicio consultaremos api.country.is para obtener solo tu país aproximado. El servicio recibe tu IP pública. WowBrowser no la guarda ni solicita GPS o coordenadas precisas. Guardaremos el permiso. Si eliges «Ahora no», volveremos a preguntarte al próximo inicio. Puedes desactivarlo en Preferencias.": "Wenn du zustimmst, fragen wir api.country.is bei jedem Start nach deinem ungefähren Land. Der Dienst erhält deine öffentliche IP. WowBrowser speichert sie nicht und fragt weder GPS noch genaue Koordinaten ab. Deine Zustimmung wird gespeichert. Wenn du „Nicht jetzt“ wählst, fragen wir beim nächsten Start erneut. Du kannst die Funktion in den Einstellungen deaktivieren."
   }
 };
 
@@ -769,7 +769,7 @@ async function refreshApproximateCountry() {
 
   locationLookupFailed = false;
   try {
-    const response = await fetch("https://ipapi.co/country/", {
+    const response = await fetch("https://api.country.is/", {
       cache: "no-store",
       credentials: "omit",
       referrerPolicy: "no-referrer",
@@ -778,7 +778,8 @@ async function refreshApproximateCountry() {
     if (!response.ok)
       throw new Error("Country lookup failed");
 
-    const countryCode = (await response.text()).trim().toUpperCase();
+    const payload = await response.json();
+    const countryCode = String(payload.country || "").trim().toUpperCase();
     if (!/^[A-Z]{2}$/.test(countryCode))
       throw new Error("Invalid country code");
 
