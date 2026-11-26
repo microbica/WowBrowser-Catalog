@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#090e14"/>
+      <stop offset=".56" stop-color="#101c26"/>
+      <stop offset="1" stop-color="#142c35"/>
+    </linearGradient>
+    <radialGradient id="ambient" cx="0" cy="0" r="1" gradientTransform="matrix(310 0 0 310 968 300)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6fc2bd" stop-opacity=".2"/>
+      <stop offset=".62" stop-color="#306c79" stop-opacity=".08"/>
+      <stop offset="1" stop-color="#172d43" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="ember" cx="0" cy="0" r="1" gradientTransform="matrix(190 0 0 190 1110 88)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#e7b45f" stop-opacity=".2"/>
+      <stop offset="1" stop-color="#e7b45f" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#f4d48f"/>
+      <stop offset=".48" stop-color="#d29b4e"/>
+      <stop offset="1" stop-color="#84572d"/>
+    </linearGradient>
+    <linearGradient id="portal" x1="64" y1="28" x2="64" y2="100" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6fc2bd"/>
+      <stop offset=".5" stop-color="#306c79"/>
+      <stop offset="1" stop-color="#172d43"/>
+    </linearGradient>
+    <radialGradient id="portalGlow" cx="0" cy="0" r="1" gradientTransform="matrix(0 51 -45 0 64 62)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#b4eadb" stop-opacity=".75"/>
+      <stop offset="1" stop-color="#8fd8cd" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="mountains" x1="600" y1="460" x2="600" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#203640"/>
+      <stop offset="1" stop-color="#090e14"/>
+    </linearGradient>
+    <clipPath id="markClip">
+      <rect x="5" y="5" width="118" height="118" rx="34"/>
+    </clipPath>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#background)"/>
+  <rect width="1200" height="630" fill="url(#ambient)"/>
+  <rect width="1200" height="630" fill="url(#ember)"/>
+
+  <g opacity=".2" stroke="#d8ba82" fill="none">
+    <circle cx="974" cy="310" r="248" stroke-width="1"/>
+    <circle cx="974" cy="310" r="214" stroke-width="1" stroke-dasharray="2 13" stroke-linecap="round"/>
+    <circle cx="974" cy="310" r="183" stroke-width="1.5"/>
+    <path d="M690 310h-44m616 0h44M974 26v-24m0 616v-24" stroke-width="1"/>
+  </g>
+
+  <path d="M0 550 152 457l111 70 164-134 128 118 161-159 137 142 157-109 190 126v119H0V550Z" fill="#172a34" opacity=".75"/>
+  <path d="M0 588 183 503l141 67 172-100 156 96 176-89 143 76 229-104v181H0V588Z" fill="url(#mountains)"/>
+  <path d="M0 609c206-52 372-41 548 10 165 48 352 42 652-26v37H0v-21Z" fill="#080d12" opacity=".62"/>
+
+  <g transform="translate(790 126) scale(2.88)">
+    <g clip-path="url(#markClip)">
+      <rect x="5" y="5" width="118" height="118" rx="34" fill="#101a25"/>
+      <circle cx="64" cy="63" r="57" fill="url(#portalGlow)" opacity=".32"/>
+      <circle cx="64" cy="64" r="48" stroke="url(#gold)" stroke-width="3"/>
+      <circle cx="64" cy="64" r="40" stroke="#e8c581" stroke-opacity=".25"/>
+      <path d="M34 93V62c0-17 13.4-30 30-30s30 13 30 30v31H34Z" fill="url(#portal)" stroke="url(#gold)" stroke-width="4"/>
+      <path d="M43 91V63c0-12 9-21 21-21s21 9 21 21v28H43Z" fill="#183e4b" fill-opacity=".72"/>
+      <path d="M45 86c5-9 12-13 19-12 8 1 12 5 19 13v8H45v-9Z" fill="#172b38" fill-opacity=".82"/>
+      <path d="m60 63 4-12 4 12 11 4-11 4-4 12-4-12-11-4 11-4Z" fill="#ffe5a6"/>
+      <path d="m64 17 2.2 7.4L74 27l-7.8 2.6L64 37l-2.2-7.4L54 27l7.8-2.6L64 17Z" fill="#f4d38d"/>
+      <path d="M26 102c12-7 25-10 38-10s26 3 38 10" stroke="#e5b970" stroke-opacity=".48" stroke-width="2"/>
+      <circle cx="27" cy="64" r="2" fill="#f0cd89"/>
+      <circle cx="101" cy="64" r="2" fill="#f0cd89"/>
+    </g>
+  </g>
+
+  <g fill="#f0d394">
+    <path d="m737 137 3.2 10.8 10.8 3.2-10.8 3.2-3.2 10.8-3.2-10.8-10.8-3.2 10.8-3.2L737 137Z" opacity=".8"/>
+    <path d="m1136 459 2.4 8.2 8.2 2.4-8.2 2.4-2.4 8.2-2.4-8.2-8.2-2.4 8.2-2.4 2.4-8.2Z" opacity=".7"/>
+    <circle cx="762" cy="432" r="2" opacity=".6"/>
+    <circle cx="1095" cy="174" r="2" opacity=".55"/>
+    <circle cx="1160" cy="345" r="1.8" opacity=".6"/>
+  </g>
+
+  <g transform="translate(72 59)">
+    <rect width="58" height="58" rx="16" fill="#101a25" stroke="#d29b4e" stroke-opacity=".55"/>
+    <path d="M14 44V31c0-9 6.7-16 15-16s15 7 15 16v13H14Z" fill="url(#portal)" stroke="#f4d48f" stroke-width="2"/>
+    <path d="m29 31 2.5-7.5L34 31l7.5 2.5L34 36l-2.5 7.5L29 36l-7.5-2.5L29 31Z" fill="#ffe5a6"/>
+    <text x="76" y="39" fill="#f2eee6" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700" letter-spacing="-.8">Wow<tspan fill="#c5a66e" font-weight="400">Browser</tspan></text>
+  </g>
+
+  <g font-family="Segoe UI, Arial, sans-serif">
+    <circle cx="76" cy="177" r="3" fill="#e1b66d"/>
+    <text x="91" y="183" fill="#dbb875" font-size="16" font-weight="700" letter-spacing="3">CATÁLOGO DE SERVIDORES WOW</text>
+
+    <text x="72" y="274" fill="#f5f0e6" font-family="Georgia, Times New Roman, serif" font-size="62" letter-spacing="-1.8">Tus mundos WoW.</text>
+    <text x="72" y="347" fill="#f5f0e6" font-family="Georgia, Times New Roman, serif" font-size="62" letter-spacing="-1.8">En un solo lugar.</text>
+
+    <text x="75" y="409" fill="#cbd0cd" font-size="23">Servidores verificados y jugables</text>
+    <text x="75" y="443" fill="#cbd0cd" font-size="23">directamente desde tu navegador.</text>
+
+    <path d="M75 513h44" stroke="#d29b4e" stroke-width="2"/>
+    <text x="75" y="551" fill="#f2eee6" font-size="21" font-weight="600" letter-spacing=".2">wowbrowser.pixplix.com</text>
+    <text x="1128" y="554" text-anchor="end" fill="#9ba8a8" font-size="13" font-weight="700" letter-spacing="3">PIXPLIX</text>
+  </g>
+
+  <rect x=".5" y=".5" width="1199" height="629" rx="2" stroke="#d8ba82" stroke-opacity=".14"/>
+</svg>
