@@ -9,7 +9,7 @@ database_name = "wowbrowser-click-counts"
 database_id = "2d980937-5714-471c-95e5-b1aa483836e9"
 
 [vars]
-SERVER_IDS = "grimfall-wow,wow-peru-land"
+SERVER_IDS = "lasthavens,keldurn-classic,keldurn-ascension,shadopan,wow-peru-land,grimfall-wow,clubwow,gravespire,frostevil-wotlk,frostevil-tbc,wow-kraken"
 ALLOWED_ORIGINS = "https://wowbrowser.pixplix.com,http://localhost:8787,http://127.0.0.1:8787"
 
 # Cloudflare intercepta únicamente /api/* sin cambiar el hosting del catálogo.

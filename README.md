@@ -10,6 +10,26 @@ Feed público y dashboard de WowBrowser. GitHub Pages lo publica tanto en `https
 
 Para actualizar el catálogo: edita `catalog.json`, commit y push. La app lo descarga al arrancar (con caché local para modo offline).
 
+## Servidores incluidos
+
+Comprobación realizada el **25-11-2026 (UTC)**. Se verificaron las webs oficiales, las URLs de juego y los recursos o APIs públicas; no se crearon cuentas ni se jugaron partidas. Se excluyen clientes locales, cloud gaming, servidores ceridos, directorios y proyectos sin acceso web confirmado.
+
+| Servidor | Versión | Idioma | Acceso |
+|---|---|---|---|
+| Lasthavens | WotLK 3.3.5a | Inglés | https://lasthavens.com/play |
+| Keldurn — Classic | Vanilla 1.12.1 | Inglés / español | https://play.keldurn.com/ |
+| Keldurn — Ascension | WotLK 3.3.5 custom | Inglés / español | https://ascension.keldurn.com/ |
+| Shadopan | MoP 5.4.8 | Inglés / multilingüe | https://play.shadopan.com/ |
+| WoW Perú Land | WotLK 3.3.5a, fase Vanilla | Español | https://play.wowperuland.com/ |
+| Grimfall WoW — Classless y Conquest | WotLK 3.3.5a custom | Inglés | https://webclient-live.grimfallwow.com/?mode=embed |
+| Club WoW — Main y Arena | WotLK 3.3.5a custom | Inglés | https://clubwow.gg/wow/ |
+| Gravespire | WotLK 3.3.5a | Inglés | https://play.gravespire.com/ |
+| FrostEvil — WotLK | WotLK 3.3.5a | Inglés / multilingüe | https://frostevil.eu/play/ |
+| FrostEvil — TBC | TBC 2.4.3 | Inglés / multilingüe | https://frostevil.eu/tbc/play/ |
+| WoW Kraken — Classic y Vanilla+ | Vanilla / Vanilla+ | Ruso / inglés | https://wow-kraken.ru/classic-browser-test/?lang=en |
+
+La disponibilidad puede cambiar. Algunos proyectos están en desarrollo o beta y varios exigen una cuenta gratuita. Son servidores no oficiales: utiliza credenciales únicas y no introduzcas una cuenta de Battle.net.
+
 ## Contador global de clics
 
 Cada tarjeta muestra los clics globales acumulados al abrir ese servidor. El dashboard consulta `/api/stats` y envía un `POST` anónimo a `/api/servers/:id/click` cuando se pulsa «Abrir cliente». Los servidores añadidos manualmente no se contabilizan.
