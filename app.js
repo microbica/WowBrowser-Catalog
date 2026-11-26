@@ -145,6 +145,19 @@ const seedServers = [
     description: "Acceso beta abierto a Classic y Vanilla+ con la misma cuenta y personajes. Bastion sigue la progresión clásica; Stormbringer añade cuartas maestrías y cuatro razas.",
     symbol: "WK",
     source: "seed"
+  },
+  {
+    id: "wow-peru",
+    name: "Wow-Peru",
+    playUrl: "https://play.proyectoandes.net/?server=wow-peru&login=manual",
+    registerUrl: "https://wow-peru.lat/registro.html",
+    favicon: "https://wow-peru.lat/favicon.ico",
+    language: "es",
+    region: "americas",
+    version: "wotlk",
+    description: "Servidor de WoW para jugar desde el navegador en Perú. Acceso directo sin instalar cliente local.",
+    symbol: "WP",
+    source: "seed"
   }
 ];
 

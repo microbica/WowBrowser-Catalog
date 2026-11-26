@@ -47,7 +47,38 @@ button { color: inherit; }
 .splash-caption { margin-top: 10px; color: #b5b0a5; font-size: 9px; letter-spacing: .5px; }
 @keyframes ember { 50% { opacity: .48; box-shadow: 0 0 4px #edbf71; } }
 @keyframes map-drift { to { transform: scale(1.065) translate3d(-.5%, -.4%, 0); } }
-.app-shell { display: flex; min-height: 100vh; }
+.app-shell { display: flex; min-height: 100vh; position: relative; }
+
+.whatsapp-fab {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 40;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #25d366;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  border: 0;
+  cursor: pointer;
+}
+
+.whatsapp-fab:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(37, 211, 102, 0.35);
+}
+
+.whatsapp-fab:focus-visible {
+  outline: 2px solid var(--accent-strong);
+  outline-offset: 3px;
+}
 .sidebar { position: fixed; inset: 0 auto 0 0; z-index: 2; display: flex; width: 228px; flex-direction: column; padding: 25px 16px 18px; background: var(--sidebar); border-right: 1px solid #23242a; }
 .brand { display: flex; align-items: center; gap: 10px; margin: 0 0 49px 5px; color: var(--text); text-decoration: none; font-family: "Segoe UI", sans-serif; font-size: 16px; font-weight: 800; letter-spacing: -.7px; }
 .brand-mark { display: block; width: 34px; height: 34px; filter: drop-shadow(0 3px 10px #d6993c35); }
