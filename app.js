@@ -23,6 +23,7 @@ const seedServers = [
     id: "lasthavens",
     name: "Lasthavens",
     playUrl: "https://lasthavens.com/play",
+    registerUrl: "https://lasthavens.com/play#create",
     favicon: "https://lasthavens.com/favicon.svg",
     language: "en",
     region: "other",
@@ -32,33 +33,28 @@ const seedServers = [
     source: "seed"
   },
   {
-    id: "keldurn-classic",
-    name: "Keldurn — Classic",
+    id: "keldurn",
+    name: "Keldurn — Classic y Ascension",
     playUrl: "https://play.keldurn.com/",
+    registerUrl: "https://play.keldurn.com/register",
+    variants: [
+      { label: "Classic", playUrl: "https://play.keldurn.com/", version: "classic" },
+      { label: "Ascension", playUrl: "https://ascension.keldurn.com/", version: "wotlk" }
+    ],
+    versionLabel: "Classic / WotLK",
     favicon: "https://keldurn.com/favicon.svg?v=5",
     language: "en",
     region: "other",
     version: "classic",
-    description: "MMORPG independiente compatible con Vanilla: reino PvP persistente, nivel 60 y progresión x1. Funciona en PC, Mac, Chromebook y dispositivos móviles.",
+    description: "MMORPG independiente en el navegador: Classic ofrece PvP persistente, nivel 60 y progresión x1; Ascension añade Conquest of Azeroth con 21 clases nuevas sobre Wrath. Sin descargas y compatible con móvil.",
     symbol: "KC",
-    source: "seed"
-  },
-  {
-    id: "keldurn-ascension",
-    name: "Keldurn — Ascension",
-    playUrl: "https://ascension.keldurn.com/",
-    favicon: "https://ascension.keldurn.com/favicon.svg",
-    language: "en",
-    region: "other",
-    version: "wotlk",
-    description: "Reino custom de Conquest of Azeroth con 21 clases nuevas sobre Wrath. Gratis, sin descargas ni registro obligatorio, con XP de x1 a x5.",
-    symbol: "KA",
     source: "seed"
   },
   {
     id: "shadopan",
     name: "Shadopan",
     playUrl: "https://play.shadopan.com/",
+    registerUrl: "https://shadopan.com/en",
     favicon: "https://play.shadopan.com/favicon.svg",
     language: "en",
     region: "other",
@@ -71,6 +67,7 @@ const seedServers = [
     id: "wow-peru-land",
     name: "WoW Perú Land",
     playUrl: "https://play.wowperuland.com/",
+    registerUrl: "https://wowperuland.com/registro",
     favicon: "https://wowperuland.com/assets/img/favicon-v2.png",
     language: "es",
     region: "americas",
@@ -83,6 +80,7 @@ const seedServers = [
     id: "grimfall-wow",
     name: "Grimfall WoW — Classless y Conquest",
     playUrl: "https://webclient-live.grimfallwow.com/?mode=embed",
+    registerUrl: "https://www.grimfallwow.com/register",
     favicon: "https://www.grimfallwow.com/favicon.ico",
     language: "en",
     region: "other",
@@ -95,6 +93,7 @@ const seedServers = [
     id: "clubwow",
     name: "Club WoW — Main y Arena",
     playUrl: "https://clubwow.gg/wow/",
+    registerUrl: "https://clubwow.gg",
     favicon: "https://clubwow.gg/wow/assets/icons/icon-192.png",
     language: "en",
     region: "other",
@@ -107,6 +106,7 @@ const seedServers = [
     id: "gravespire",
     name: "Gravespire",
     playUrl: "https://play.gravespire.com/",
+    registerUrl: "https://gravespire.com/register",
     favicon: "https://www.gravespire.com/assets/favicon.png",
     language: "en",
     region: "other",
@@ -116,33 +116,28 @@ const seedServers = [
     source: "seed"
   },
   {
-    id: "frostevil-wotlk",
-    name: "FrostEvil — WotLK",
-    playUrl: "https://frostevil.eu/play/",
+    id: "frostevil",
+    name: "FrostEvil — WotLK y TBC",
+    playUrl: "https://frostevil.eu/#play",
+    registerUrl: "https://frostevil.eu/#play",
+    variants: [
+      { label: "WotLK", playUrl: "https://frostevil.eu/#play", version: "wotlk" },
+      { label: "TBC", playUrl: "https://frostevil.eu/tbc/play/", version: "tbc" }
+    ],
+    versionLabel: "WotLK / TBC",
     favicon: "https://frostevil.eu/site/favicon.svg",
     language: "en",
     region: "other",
     version: "wotlk",
-    description: "Reino gratuito de Wrath 3.3.5a con XP x5, juego cruzado entre facciones, mazmorras dinámicas y controles táctiles. Acceso directo desde navegador.",
-    symbol: "FW",
-    source: "seed"
-  },
-  {
-    id: "frostevil-tbc",
-    name: "FrostEvil — TBC",
-    playUrl: "https://frostevil.eu/tbc/play/",
-    favicon: "https://frostevil.eu/site/favicon.svg",
-    language: "en",
-    region: "other",
-    version: "tbc",
-    description: "Reino gratuito de The Burning Crusade 2.4.3, nivel 70 y XP x10, con juego cruzado entre facciones, mazmorras dinámicas y controles táctiles.",
-    symbol: "FT",
+    description: "Reinos gratuitos de Wrath 3.3.5a (XP x5) y The Burning Crusade 2.4.3 (XP x10), con juego cruzado entre facciones, mazmorras dinámicas y controles táctiles. Acceso directo desde navegador.",
+    symbol: "FE",
     source: "seed"
   },
   {
     id: "wow-kraken",
     name: "WoW Kraken — Classic y Vanilla+",
-    playUrl: "https://wow-kraken.ru/classic-browser-test/?lang=en",
+    playUrl: "https://wow-kraken.ru/play-in-browser.php?lang=en",
+    registerUrl: "https://wow-kraken.ru/auth.php?return_to=cabinet.php&lang=en&tab=register",
     favicon: "https://wow-kraken.ru/favicon.png",
     language: "other",
     region: "other",
@@ -233,6 +228,13 @@ const pageNamesByLanguage = {
   de: { home: "Start", catalog: "Katalog", favorites: "Favoriten", settings: "Einstellungen" }
 };
 let pageNames = pageNamesByLanguage.es;
+const documentTitles = {
+  es: "WowBrowser · Catálogo de servidores WoW en el navegador",
+  en: "WowBrowser · Browser-based WoW server catalog",
+  pt: "WowBrowser · Catálogo de servidores WoW no navegador",
+  fr: "WowBrowser · Catalogue de serveurs WoW dans le navigateur",
+  de: "WowBrowser · Katalog von WoW-Servern im Browser"
+};
 
 const englishUiText = {
   "WOWBROWSER · VISTA PREVIA": "WOWBROWSER · PREVIEW",
@@ -262,10 +264,10 @@ const englishUiText = {
   "Español": "Spanish", "Inglés": "English", "Portugués": "Portuguese",
   "Francés": "French", "Alemán": "German", "Cualquier idioma": "Any language",
   "Otro / sin especificar": "Other / unspecified",
-  "Ordenar": "Sort by", "Más jugados · próximamente": "Most played · coming soon",
+  "Ordenar": "Sort by", "Más jugados": "Most played",
   "No encontramos servidores": "No servers found",
   "Prueba con otro término o añade un servidor.": "Try another search or add a server.",
-  "Los votos diarios y “Más jugados” se activarán al conectar el catálogo a un servicio central. Este prototipo no registra ni simula votos.": "Daily votes and “Most played” will be enabled once the catalog has a central service. This prototype does not record or simulate votes.",
+  "El orden «Más jugados» se basa en los clics globales al abrir cada servidor.": "“Most played” is sorted by the global clicks when each server is opened.",
   "TUS MUNDOS GUARDADOS": "YOUR SAVED WORLDS",
   "Acceso rápido a los servidores que quieres tener a mano.": "Quick access to the servers you want close at hand.",
   "Aún no tienes favoritos": "No favorites yet",
@@ -298,7 +300,7 @@ const englishUiText = {
   "Para recomendar servidores de tu región, WowBrowser consultará": "To recommend servers in your region, WowBrowser will query",
   "al iniciar. Ese servicio recibe tu IP pública y devuelve solo un código de país. No solicitamos GPS ni coordenadas precisas, y no guardamos tu IP. La decisión se recuerda y puedes cambiarla en Preferencias.": "at startup. That service receives your public IP and returns only a country code. We do not request GPS or precise coordinates, and we do not store your IP. Your choice is remembered and can be changed in Preferences.",
   "Ahora no": "Not now", "Permitir país aproximado": "Allow approximate country",
-    "Abrir cliente": "Open client",
+    "Abrir cliente": "Open client", "Registrarse": "Register",
     "Añadir a favoritos": "Add to favorites", "Quitar de favoritos": "Remove from favorites",
     "Filtrar por idioma": "Filter by language", "Filtrar por versión del juego": "Filter by game version",
     "Filtrar por región": "Filter by region", "Ordenar servidores": "Sort servers",
@@ -346,10 +348,10 @@ const uiTextByLanguage = {
     "Otro": "Outro", "Sin especificar": "Não especificada", "Español": "Espanhol", "Inglés": "Inglês",
     "Portugués": "Português", "Francés": "Francês", "Alemán": "Alemão", "Cualquier idioma": "Qualquer idioma",
     "Otro / sin especificar": "Outro / não especificado", "Ordenar": "Ordenar",
-    "Más jugados · próximamente": "Mais jogados · em breve",
+    "Más jugados": "Mais jogados",
     "No encontramos servidores": "Não encontramos servidores",
     "Prueba con otro término o añade un servidor.": "Tente outro termo ou adicione um servidor.",
-    "Los votos diarios y “Más jugados” se activarán al conectar el catálogo a un servicio central. Este prototipo no registra ni simula votos.": "Os votos diários e “Mais jogados” serão ativados quando o catálogo se conectar a um serviço central. Este protótipo não registra nem simula votos.",
+    "El orden «Más jugados» se basa en los clics globales al abrir cada servidor.": "A ordem “Mais jogados” é baseada nos cliques globais ao abrir cada servidor.",
     "TUS MUNDOS GUARDADOS": "SEUS MUNDOS SALVOS",
     "Acceso rápido a los servidores que quieres tener a mano.": "Acesso rápido aos servidores que você quer manter por perto.",
     "Aún no tienes favoritos": "Você ainda não tem favoritos",
@@ -377,7 +379,7 @@ const uiTextByLanguage = {
     "Para recomendar servidores de tu región, WowBrowser consultará": "Para recomendar servidores da sua região, o WowBrowser consultará",
     "al iniciar. Ese servicio recibe tu IP pública y devuelve solo un código de país. No solicitamos GPS ni coordenadas precisas, y no guardamos tu IP. La decisión se recuerda y puedes cambiarla en Preferencias.": "ao iniciar. Esse serviço recebe seu IP público e retorna apenas o código do país. Não solicitamos GPS nem coordenadas precisas e não salvamos seu IP. Sua escolha fica salva e pode ser alterada em Preferências.",
     "Ahora no": "Agora não", "Permitir país aproximado": "Permitir país aproximado",
-    "Abrir cliente": "Abrir cliente",
+    "Abrir cliente": "Abrir cliente", "Registrarse": "Registrar",
     "Añadir a favoritos": "Adicionar aos favoritos", "Quitar de favoritos": "Remover dos favoritos",
     "Filtrar por idioma": "Filtrar por idioma", "Filtrar por versión del juego": "Filtrar por versão do jogo",
     "Filtrar por región": "Filtrar por região", "Ordenar servidores": "Ordenar servidores",
@@ -420,10 +422,10 @@ const uiTextByLanguage = {
     "Otro": "Autre", "Sin especificar": "Non précisé", "Español": "Espagnol", "Inglés": "Anglais",
     "Portugués": "Portugais", "Francés": "Français", "Alemán": "Allemand", "Cualquier idioma": "Toutes les langues",
     "Otro / sin especificar": "Autre / non précisé", "Ordenar": "Trier",
-    "Más jugados · próximamente": "Les plus joués · bientôt",
+    "Más jugados": "Les plus joués",
     "No encontramos servidores": "Aucun serveur trouvé",
     "Prueba con otro término o añade un servidor.": "Essayez un autre terme ou ajoutez un serveur.",
-    "Los votos diarios y “Más jugados” se activarán al conectar el catálogo a un servicio central. Este prototipo no registra ni simula votos.": "Les votes quotidiens et le classement « Les plus joués » seront activés avec un service central. Ce prototype n’enregistre ni ne simule de votes.",
+    "El orden «Más jugados» se basa en los clics globales al abrir cada servidor.": "Le classement « Les plus joués » est basé sur les clics globaux lors de l’ouverture de chaque serveur.",
     "TUS MUNDOS GUARDADOS": "VOS MONDES ENREGISTRÉS",
     "Acceso rápido a los servidores que quieres tener a mano.": "Accédez rapidement aux serveurs que vous souhaitez garder à portée de main.",
     "Aún no tienes favoritos": "Vous n’avez pas encore de favoris",
@@ -451,7 +453,7 @@ const uiTextByLanguage = {
     "Para recomendar servidores de tu región, WowBrowser consultará": "Pour recommander des serveurs de votre région, WowBrowser consultera",
     "al iniciar. Ese servicio recibe tu IP pública y devuelve solo un código de país. No solicitamos GPS ni coordenadas precisas, y no guardamos tu IP. La decisión se recuerda y puedes cambiarla en Preferencias.": "au démarrage. Ce service reçoit votre IP publique et renvoie uniquement un code pays. Nous ne demandons ni GPS ni coordonnées précises et ne conservons pas votre IP. Votre choix est mémorisé et modifiable dans Préférences.",
     "Ahora no": "Pas maintenant", "Permitir país aproximado": "Autoriser le pays approximatif",
-    "Abrir cliente": "Ouvrir le client",
+    "Abrir cliente": "Ouvrir le client", "Registrarse": "S’inscrire",
     "Añadir a favoritos": "Ajouter aux favoris", "Quitar de favoritos": "Retirer des favoris",
     "Filtrar por idioma": "Filtrer par langue", "Filtrar por versión del juego": "Filtrer par version du jeu",
     "Filtrar por región": "Filtrer par région", "Ordenar servidores": "Trier les serveurs",
@@ -494,10 +496,10 @@ const uiTextByLanguage = {
     "Otro": "Andere", "Sin especificar": "Nicht angegeben", "Español": "Spanisch", "Inglés": "Englisch",
     "Portugués": "Portugiesisch", "Francés": "Französisch", "Alemán": "Deutsch", "Cualquier idioma": "Alle Sprachen",
     "Otro / sin especificar": "Andere / nicht angegeben", "Ordenar": "Sortieren",
-    "Más jugados · próximamente": "Meistgespielt · demnächst",
+    "Más jugados": "Meistgespielt",
     "No encontramos servidores": "Keine Server gefunden",
     "Prueba con otro término o añade un servidor.": "Versuche einen anderen Suchbegriff oder füge einen Server hinzu.",
-    "Los votos diarios y “Más jugados” se activarán al conectar el catálogo a un servicio central. Este prototipo no registra ni simula votos.": "Tägliche Stimmen und „Meistgespielt“ werden mit einem zentralen Dienst aktiviert. Dieser Prototyp erfasst oder simuliert keine Stimmen.",
+    "El orden «Más jugados» se basa en los clics globales al abrir cada servidor.": "Die Sortierung „Meistgespielt“ basiert auf den globalen Klicks beim Öffnen jedes Servers.",
     "TUS MUNDOS GUARDADOS": "DEINE GESPEICHERTEN WELTEN",
     "Acceso rápido a los servidores que quieres tener a mano.": "Schneller Zugriff auf Server, die du griffbereit haben möchtest.",
     "Aún no tienes favoritos": "Noch keine Favoriten",
@@ -525,7 +527,7 @@ const uiTextByLanguage = {
     "Para recomendar servidores de tu región, WowBrowser consultará": "Um Server aus deiner Region zu empfehlen, fragt WowBrowser",
     "al iniciar. Ese servicio recibe tu IP pública y devuelve solo un código de país. No solicitamos GPS ni coordenadas precisas, y no guardamos tu IP. La decisión se recuerda y puedes cambiarla en Preferencias.": "beim Start ab. Dieser Dienst erhält deine öffentliche IP und gibt nur den Ländercode zurück. Wir fragen weder GPS noch genaue Koordinaten ab und speichern deine IP nicht. Deine Wahl wird gespeichert und kann in Einstellungen geändert werden.",
     "Ahora no": "Nicht jetzt", "Permitir país aproximado": "Ungefähres Land erlauben",
-    "Abrir cliente": "Client öffnen",
+    "Abrir cliente": "Client öffnen", "Registrarse": "Registrieren",
     "Añadir a favoritos": "Zu Favoriten hinzufügen", "Quitar de favoritos": "Aus Favoriten entfernen",
     "Filtrar por idioma": "Nach Sprache filtern", "Filtrar por versión del juego": "Nach Spielversion filtern",
     "Filtrar por región": "Nach Region filtern", "Ordenar servidores": "Server sortieren",
@@ -771,7 +773,7 @@ function serverCard(server) {
   const isFavorite = favorites.has(server.id);
   const lang = languageNames[server.language] || "Otro";
   const region = regionNames[server.region] || "Sin especificar";
-  const version = versionNames[server.version] || "Sin especificar";
+  const version = server.versionLabel || versionNames[server.version] || "Sin especificar";
   const text = uiTextByLanguage[uiLanguage] || {};
   const description = text[server.description] || server.description ||
     text["Servidor añadido por ti."] || "Servidor añadido por ti.";
@@ -787,6 +789,21 @@ function serverCard(server) {
   const crest = faviconUrl
     ? `<img class="server-favicon" src="${escapeHtml(faviconUrl)}" alt="" loading="lazy" decoding="async" width="32" height="32">`
     : `<span class="server-favicon-fallback" aria-hidden="true">${initial}</span>`;
+  const registerUrl = safeHttpUrl(server.registerUrl);
+  const variants = Array.isArray(server.variants)
+    ? server.variants
+        .map((variant) => ({
+          label: variant && String(variant.label || "").trim(),
+          playUrl: safeHttpUrl(variant && variant.playUrl)
+        }))
+        .filter((variant) => variant.label && variant.playUrl)
+    : [];
+  const playLinks = variants.length
+    ? variants.map((variant) => `<a class="play-link variant-link" href="${escapeHtml(variant.playUrl)}" data-launch="${escapeHtml(server.id)}" title="${escapeHtml(translateUiText("Abrir cliente") + " · " + variant.label)}">${escapeHtml(variant.label)} <span>→</span></a>`).join("")
+    : `<a class="play-link" href="${escapeHtml(url)}" data-launch="${escapeHtml(server.id)}">${escapeHtml(translateUiText("Abrir cliente"))} <span>→</span></a>`;
+  const registerLink = registerUrl
+    ? `<a class="register-link" href="${escapeHtml(registerUrl)}" data-open-external target="_blank" rel="noopener noreferrer">${escapeHtml(translateUiText("Registrarse"))} <span aria-hidden="true">↗</span></a>`
+    : "";
   const card = document.createElement("article");
   card.className = "server-card";
   card.innerHTML = `
@@ -804,7 +821,7 @@ function serverCard(server) {
       </div>
       <p class="server-description">${escapeHtml(description)}</p>
       <div class="server-meta"><span class="meta-chip">${escapeHtml(lang)}</span><span class="meta-chip region">${escapeHtml(region)}</span><span class="meta-chip version">${escapeHtml(version)}</span></div>
-      <div class="server-actions"><a class="play-link" href="${escapeHtml(url)}" data-launch="${escapeHtml(server.id)}">${escapeHtml(translateUiText("Abrir cliente"))} <span>→</span></a><span class="server-clicks ${clicks > 0 ? "has-clicks" : ""}" data-clicks-for="${escapeHtml(server.id)}" title="${escapeHtml((clickWords[uiLanguage] || clickWords.es)[2])}"><span class="clicks-dot" aria-hidden="true"></span><span class="clicks-number">${clickLabel}</span> <span class="clicks-word">${escapeHtml(clickWord(clicks))}</span></span></div>
+      <div class="server-actions"><div class="server-action-links">${registerLink}${playLinks}</div><span class="server-clicks ${clicks > 0 ? "has-clicks" : ""}" data-clicks-for="${escapeHtml(server.id)}" title="${escapeHtml((clickWords[uiLanguage] || clickWords.es)[2])}"><span class="clicks-dot" aria-hidden="true"></span><span class="clicks-number">${clickLabel}</span> <span class="clicks-word">${escapeHtml(clickWord(clicks))}</span></span></div>
     </div>`;
 
   const faviconImg = card.querySelector(".server-favicon");
@@ -885,6 +902,7 @@ async function loadClickStats() {
     clickCounts = nextCounts;
     clickStatsLoaded = true;
     updateAllClickDisplays();
+    if (document.querySelector("#sort-filter").value === "most-played") renderCatalog();
     return true;
   } catch {
     return false;
@@ -944,7 +962,7 @@ function applyUiLanguage(language) {
     node = walker.nextNode();
   }
 
-  document.title = "WowBrowser";
+  document.title = documentTitles[uiLanguage] || documentTitles.es;
   const locales = Object.entries(languageNames).filter(([value]) => ["es", "en", "pt", "fr", "de"].includes(value));
   const languageOptions = Object.entries(languageNames);
   const regionOptions = Object.entries(regionNames);
@@ -1013,9 +1031,11 @@ function renderCatalog() {
     const searchable = [
       server.name,
       server.description,
+      server.versionLabel || "",
       languageNames[server.language],
       regionNames[server.region],
-      versionNames[server.version]
+      versionNames[server.version],
+      ...(Array.isArray(server.variants) ? server.variants.map((variant) => (variant && variant.label) || "") : [])
     ].join(" ").toLocaleLowerCase();
     const matchesQuery = !query || searchable.includes(query);
     return matchesQuery &&
@@ -1023,6 +1043,13 @@ function renderCatalog() {
       (version === "all" || server.version === version) &&
       (region === "all" || server.region === region);
   });
+  if (document.querySelector("#sort-filter").value === "most-played") {
+    servers.sort((left, right) => {
+      const leftClicks = Number.isFinite(clickCounts[left.id]) ? clickCounts[left.id] : 0;
+      const rightClicks = Number.isFinite(clickCounts[right.id]) ? clickCounts[right.id] : 0;
+      return rightClicks - leftClicks;
+    });
+  }
   renderGrid(document.querySelector("#catalog-server-grid"), servers);
   const countUnit = {
     es: ["servidor", "servidores"],
@@ -1366,6 +1393,7 @@ document.querySelector("#server-search").addEventListener("input", renderCatalog
 document.querySelector("#language-filter").addEventListener("change", renderCatalog);
 document.querySelector("#version-filter").addEventListener("change", renderCatalog);
 document.querySelector("#region-filter").addEventListener("change", renderCatalog);
+document.querySelector("#sort-filter").addEventListener("change", renderCatalog);
 
 document.querySelector("#ui-language").value = uiLanguage;
 document.querySelector("#preferred-language").value = preferences.language;

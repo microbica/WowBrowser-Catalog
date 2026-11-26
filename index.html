@@ -4,9 +4,28 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="dark">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https:; object-src 'none'; base-uri 'none'; form-action 'self'">    <title>WowBrowser</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https:; object-src 'none'; base-uri 'none'; form-action 'self'">
+    <title>WowBrowser · Catálogo de servidores WoW en el navegador</title>
+    <meta name="description" content="Descubre servidores de World of Warcraft jugables en el navegador. Filtra por idioma, expansión y región, y abre sus clientes web desde un solo lugar.">
+    <meta name="keywords" content="WowBrowser, World of Warcraft, servidores WoW, servidores privados, jugar WoW en navegador, cliente web, WotLK, Classic, TBC, servidores en español">
+    <meta name="author" content="PixPlix">
+    <meta name="application-name" content="WowBrowser">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="theme-color" content="#111214">
+    <link rel="canonical" href="https://wowbrowser.pixplix.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="WowBrowser">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:url" content="https://wowbrowser.pixplix.com/">
+    <meta property="og:title" content="WowBrowser · Catálogo de servidores WoW en el navegador">
+    <meta property="og:description" content="Encuentra tu próximo mundo: servidores de WoW jugables en el navegador, filtrados por idioma, expansión y región.">
+    <meta property="og:image" content="https://wowbrowser.pixplix.com/assets/wowbrowser-mark.svg">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="WowBrowser · Catálogo de servidores WoW en el navegador">
+    <meta name="twitter:description" content="Encuentra tu próximo mundo: servidores de WoW jugables en el navegador, filtrados por idioma, expansión y región.">
+    <meta name="twitter:image" content="https://wowbrowser.pixplix.com/assets/wowbrowser-mark.svg">
     <link rel="icon" type="image/svg+xml" href="assets/wowbrowser-mark.svg">
-    <link rel="stylesheet" href="styles.css?v=88572a1">
+    <link rel="stylesheet" href="styles.css?v=88572a2">
   </head>
   <body>
     <aside class="download-banner" id="download-banner" aria-label="Descargar WowBrowser para Windows" data-i18n-aria-label="bannerLabel" hidden>
@@ -167,13 +186,13 @@
             <label class="sort-control">Ordenar
               <select id="sort-filter" aria-label="Ordenar servidores">
                 <option value="recommended">Recomendados</option>
-                <option value="most-played" disabled>Más jugados · próximamente</option>
+                <option value="most-played">Más jugados</option>
               </select>
             </label>
           </div>
           <div class="server-grid" id="catalog-server-grid"></div>
           <div class="empty-state hidden" id="empty-state"><img class="empty-illustration" src="assets/empty-worlds.svg" alt="" aria-hidden="true"><h3>No encontramos servidores</h3><p>Prueba con otro término o añade un servidor.</p></div>
-          <div class="catalog-footnote">Los votos diarios y “Más jugados” se activarán al conectar el catálogo a un servicio central. Este prototipo no registra ni simula votos.</div>
+          <div class="catalog-footnote">El orden «Más jugados» se basa en los clics globales al abrir cada servidor.</div>
         </section>
 
         <section class="view" id="view-favorites">
@@ -256,6 +275,6 @@
       <div class="modal-actions"><button class="secondary-button" type="button" id="dismiss-update" data-i18n="notNow">Ahora no</button></div>
     </dialog>
     <script src="splash.js"></script>
-    <script src="app.js?v=88572a1"></script>
+    <script src="app.js?v=88572a2"></script>
   </body>
 </html>
